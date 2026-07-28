@@ -96,7 +96,7 @@ body {
 
     letter-spacing: 6px;
 
-      margin-bottom: 70px;
+    margin-bottom: 70px;
 }
 
 
@@ -140,15 +140,19 @@ body {
     transform:
         scale(0.96);
 }
+
+
 /* =========================================================
    MINI GAMES HOME
 ========================================================= */
 
 #arcadeScreen {
     flex-direction: column;
-    padding: 35px 60px;
-}
+    align-items: center;
+    justify-content: flex-start;
 
+    padding: 20px 50px 35px;
+}
 
 
 /* =========================================================
@@ -157,13 +161,17 @@ body {
 
 .arcade-header {
     display: flex;
+
     align-items: center;
-    justify-content: space-between;
 
-    margin-bottom: 25px;
+    justify-content: center;
 
-    /* Moves the title down without changing tab size */
-    transform: translateY(50px);
+    width: 100%;
+
+    /* Controls where the title sits vertically */
+    height: 230px;
+
+    margin: 0;
 }
 
 .logo-area {
@@ -172,44 +180,66 @@ body {
 
 .arcade-title {
     text-align: center;
-    flex: 1;
+
+    width: 100%;
 }
 
 .arcade-title h1 {
     font-size: 75px;
+
     letter-spacing: 5px;
+
     font-weight: 800;
+
+    margin: 0;
 }
 
 .arcade-title p {
-    margin-top: 10px;
-    font-size: 22px;
+    margin-top: 12px;
+
+    font-size: 24px;
+
     color: #b9d7ed;
 }
+
 
 /* =========================================================
    GAME GRID
 ========================================================= */
 
 .game-grid {
-    flex: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 25px;
-    max-width: 1250px;
-    width: 100%;
-    margin: auto;
+
+    grid-template-columns:
+        520px
+        520px;
+
+    grid-template-rows:
+        190px
+        190px;
+
+    gap: 22px;
+
+    width: 1062px;
+
+    height: auto;
+
+    margin: 0 auto;
 }
+
 
 /* =========================================================
    GAME CARDS
 ========================================================= */
 
 .game-card {
+    width: 520px;
+
+    height: 190px;
+
     border: none;
 
-    border-radius: 22px;
+    border-radius: 28px;
 
     color: white;
 
@@ -221,18 +251,21 @@ body {
 
     text-align: left;
 
-    padding: 25px;
+    padding: 30px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,0.35);
 
     transition:
         transform 0.15s ease;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.35);
 }
 
 .game-card:active {
-    transform: scale(0.97);
+    transform:
+        scale(0.97);
 }
+
 
 .game-card::after {
     content: "";
@@ -240,11 +273,13 @@ body {
     position: absolute;
 
     width: 220px;
+
     height: 220px;
 
     border-radius: 50%;
 
     right: -60px;
+
     bottom: -80px;
 
     background:
@@ -283,8 +318,6 @@ body {
         );
 }
 
-/* Memory Match now has a clearly different colour */
-
 .memory-game-tab {
     background:
         linear-gradient(
@@ -300,18 +333,22 @@ body {
 ========================================================= */
 
 .game-icon {
-    font-size: 50px;
-    margin-bottom: 8px;
+    font-size: 45px;
+
+    margin-bottom: 5px;
 }
 
 .game-card h2 {
-    font-size: 27px;
+    font-size: 28px;
+
     margin-bottom: 8px;
 }
 
 .game-card p {
-    font-size: 16px;
+    font-size: 17px;
+
     max-width: 400px;
+
     color:
         rgba(255,255,255,0.85);
 }
@@ -319,7 +356,8 @@ body {
 .play-label {
     position: absolute;
 
-    bottom: 25px;
+    bottom: 22px;
+
     right: 25px;
 
     background:
@@ -556,7 +594,8 @@ body {
 }
 
 .building-option:active {
-    transform: scale(0.97);
+    transform:
+        scale(0.97);
 }
 
 
@@ -712,8 +751,7 @@ body {
         preserve-3d;
 }
 
-.memory-card.flipped
-.memory-inner {
+.memory-card.flipped .memory-inner {
     transform:
         rotateY(180deg);
 }
@@ -794,11 +832,13 @@ body {
 
     .welcome-logos {
         gap: 35px;
+
         margin-bottom: 35px;
     }
 
     .welcome-logos img {
         max-width: 170px;
+
         max-height: 90px;
     }
 
@@ -819,22 +859,25 @@ body {
     }
 
 
+    /* =====================================================
+       MINI GAMES PAGE
+    ===================================================== */
+
     #arcadeScreen {
         padding:
-            50px
             20px
-            20px;
+            20px
+            25px;
     }
 
     .arcade-header {
-        margin:
-            10px
-            auto
-            20px;
+        height: 170px;
+
+        margin: 0;
     }
 
     .arcade-title h1 {
-        font-size: 38px;
+        font-size: 45px;
     }
 
     .arcade-title p {
@@ -842,17 +885,33 @@ body {
     }
 
     .game-grid {
-        gap: 12px;
-        height: 65vh;
+        grid-template-columns:
+            1fr
+            1fr;
+
+        grid-template-rows:
+            170px
+            170px;
+
+        width: 100%;
+
+        height: auto;
+
+        gap: 15px;
     }
 
     .game-card {
+        width: 100%;
+
+        height: 170px;
+
         padding: 20px;
-        border-radius: 18px;
+
+        border-radius: 20px;
     }
 
     .game-icon {
-        font-size: 40px;
+        font-size: 38px;
     }
 
     .game-card h2 {
@@ -865,10 +924,20 @@ body {
 
     .play-label {
         bottom: 15px;
+
         right: 15px;
-        padding: 8px 14px;
+
+        padding:
+            8px
+            14px;
+
         font-size: 13px;
     }
+
+
+    /* =====================================================
+       OTHER GAMES
+    ===================================================== */
 
     .scramble-word {
         font-size: 45px;
@@ -876,17 +945,67 @@ body {
 
     .memory-board {
         grid-template-columns:
-            repeat(4, 75px);
+            repeat(
+                4,
+                75px
+            );
 
         gap: 8px;
     }
 
     .memory-card {
         width: 75px;
+
         height: 75px;
     }
 
 }
+
+
+/* =========================================================
+   T972 / LARGE TOUCHSCREEN LAYOUT
+========================================================= */
+
+@media (min-width: 801px) {
+
+    #arcadeScreen {
+        padding:
+            20px
+            50px
+            35px;
+    }
+
+    .arcade-header {
+        height: 230px;
+    }
+
+    .game-grid {
+        grid-template-columns:
+            520px
+            520px;
+
+        grid-template-rows:
+            190px
+            190px;
+
+        gap: 22px;
+
+        width: 1062px;
+    }
+
+    .game-card {
+        width: 520px;
+
+        height: 190px;
+    }
+
+}
+
+
+/* =========================================================
+   30 SECOND INACTIVITY TIMER
+   RETURNS TO WELCOME SCREEN
+========================================================= */
 
 </style>
 
@@ -920,8 +1039,6 @@ body {
         <h1>
             MINI GAMES
         </h1>
-
-       
 
         <button class="start-arcade-button"
                 onclick="openArcade()">
@@ -1427,7 +1544,7 @@ let inactivityTimer;
 
 
 /* =========================================================
-   20 SECOND INACTIVITY TIMER
+   30 SECOND INACTIVITY TIMER
    RETURNS TO WELCOME SCREEN
 ========================================================= */
 
