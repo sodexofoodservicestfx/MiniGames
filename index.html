@@ -398,7 +398,9 @@ body {
 
 #memoryScreen {
     background:
-        radial-gradient(circle at center, #704913, #211508);
+        radial-gradient(circle at top left, #155e63, transparent 45%),
+        radial-gradient(circle at bottom right, #0b3942, transparent 45%),
+        #071f29;
 }
 
 #memoryScreen .game-content {
@@ -492,29 +494,32 @@ body {
     background:
         linear-gradient(
             145deg,
-            #f4b52e,
-            #c77d0e
+            #f6c343,
+            #e49a18
         );
 
     font-size: clamp(45px, 5vw, 75px);
 
     color: white;
 
-    border: 4px solid rgba(255,255,255,0.15);
+    border: 4px solid rgba(255,255,255,0.25);
+        
+      box-shadow:
+        0 8px 20px rgba(0,0,0,0.4);
 }
 
 .memory-back {
-    background: white;
+    background: #ffffff;
 
-    color: #6c4713;
+    color: #0d5961;
 
     font-size: clamp(50px, 5vw, 75px);
 
     transform: rotateY(180deg);
 
-    border: 4px solid rgba(255,255,255,0.8);
+    border: 4px solid rgba(255,255,255,0.9);
 }
-
+      
 .memory-card.matched .memory-back {
     box-shadow:
         0 0 0 5px rgba(118,230,162,0.7),
