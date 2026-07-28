@@ -1,8 +1,11 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport"
       content="width=device-width, initial-scale=1.0,
                maximum-scale=1.0, user-scalable=no">
@@ -38,6 +41,7 @@ body {
     color: white;
 }
 
+
 /* =========================================================
    SCREEN SYSTEM
 ========================================================= */
@@ -52,6 +56,7 @@ body {
 .screen.active {
     display: flex;
 }
+
 
 /* =========================================================
    ARCADE HOME
@@ -179,6 +184,7 @@ body {
     font-weight: bold;
 }
 
+
 /* =========================================================
    GAME SCREEN
 ========================================================= */
@@ -193,6 +199,7 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 70px;
+    flex-shrink: 0;
 }
 
 .game-header h1 {
@@ -216,7 +223,9 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
+    min-height: 0;
 }
+
 
 /* =========================================================
    WORD SCRAMBLE
@@ -270,6 +279,7 @@ body {
     font-weight: bold;
 }
 
+
 /* =========================================================
    BUILDING GAME
 ========================================================= */
@@ -321,6 +331,7 @@ body {
 .building-option:active {
     transform: scale(0.97);
 }
+
 
 /* =========================================================
    60 SECOND CHALLENGE
@@ -379,8 +390,10 @@ body {
     cursor: pointer;
 }
 
+
 /* =========================================================
    MEMORY MATCH
+   UPDATED FOR LARGE T972 SCREEN
 ========================================================= */
 
 #memoryScreen {
@@ -388,32 +401,65 @@ body {
         radial-gradient(circle at center, #704913, #211508);
 }
 
+#memoryScreen .game-content {
+    justify-content: flex-start;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
 .memory-info {
-    font-size: 22px;
-    margin-bottom: 15px;
+    font-size: 24px;
+    margin-bottom: 18px;
+    font-weight: bold;
+    flex-shrink: 0;
 }
 
 .memory-board {
     display: grid;
-    grid-template-columns: repeat(4, 110px);
-    gap: 15px;
+
+    /* 4 columns x 4 rows */
+    grid-template-columns: repeat(4, minmax(150px, 1fr));
+
+    gap: 18px;
+
+    /* Use most of the available screen width */
+    width: min(760px, 85vw);
+
+    /* Use most of the available screen height */
+    height: min(600px, 68vh);
+
+    margin: 0 auto;
+
+    flex-shrink: 1;
 }
 
 .memory-card {
-    width: 110px;
-    height: 110px;
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
+
     cursor: pointer;
-    perspective: 700px;
+
+    perspective: 900px;
+
     background: transparent;
+
+    padding: 0;
 }
 
 .memory-inner {
     width: 100%;
     height: 100%;
+
     position: relative;
+
     transition: transform 0.5s;
+
     transform-style: preserve-3d;
 }
 
@@ -424,27 +470,67 @@ body {
 .memory-front,
 .memory-back {
     position: absolute;
+
     width: 100%;
     height: 100%;
-    border-radius: 15px;
+
+    border-radius: 20px;
+
     backface-visibility: hidden;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.35);
+
+    user-select: none;
 }
 
 .memory-front {
-    background: #f0a928;
-    font-size: 38px;
+    background:
+        linear-gradient(
+            145deg,
+            #f4b52e,
+            #c77d0e
+        );
+
+    font-size: clamp(45px, 5vw, 75px);
+
     color: white;
+
+    border: 4px solid rgba(255,255,255,0.15);
 }
 
 .memory-back {
     background: white;
+
     color: #6c4713;
-    font-size: 42px;
+
+    font-size: clamp(50px, 5vw, 75px);
+
     transform: rotateY(180deg);
+
+    border: 4px solid rgba(255,255,255,0.8);
 }
+
+.memory-card.matched .memory-back {
+    box-shadow:
+        0 0 0 5px rgba(118,230,162,0.7),
+        0 8px 25px rgba(0,0,0,0.35);
+}
+
+#memoryScreen .feedback {
+    height: 35px;
+    margin-top: 10px;
+}
+
+#memoryScreen .primary-button {
+    margin-top: 8px;
+    padding: 13px 30px;
+}
+
 
 /* =========================================================
    GAME OVER
@@ -464,11 +550,46 @@ body {
     margin-bottom: 20px;
 }
 
+
 /* =========================================================
-   MOBILE / SMALL SCREEN
+   RESPONSIVE MEMORY MATCH
 ========================================================= */
 
-@media (max-width: 800px) {
+/* Large landscape screens like T972 */
+@media (min-width: 1000px) and (min-height: 700px) {
+
+    #memoryScreen .game-header {
+        height: 60px;
+    }
+
+    #memoryScreen .game-header h1 {
+        font-size: 38px;
+    }
+
+    .memory-info {
+        font-size: 26px;
+        margin-bottom: 15px;
+    }
+
+    .memory-board {
+        width: min(850px, 88vw);
+        height: min(600px, 68vh);
+        gap: 20px;
+    }
+
+    .memory-front,
+    .memory-back {
+        border-radius: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALLER SCREENS
+========================================================= */
+
+@media (max-width: 900px) {
 
     #arcadeScreen {
         padding: 20px;
@@ -511,13 +632,72 @@ body {
     }
 
     .memory-board {
-        grid-template-columns: repeat(4, 75px);
-        gap: 8px;
+        width: 90vw;
+        height: 65vh;
+        gap: 10px;
     }
 
-    .memory-card {
-        width: 75px;
-        height: 75px;
+    .memory-front,
+    .memory-back {
+        border-radius: 14px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .memory-board {
+        width: 94vw;
+        height: 58vh;
+        gap: 7px;
+    }
+
+    .memory-front,
+    .memory-back {
+        border-radius: 10px;
+        border-width: 2px;
+    }
+
+}
+
+
+/* =========================================================
+   LANDSCAPE HEIGHT FIX
+========================================================= */
+
+@media (max-height: 700px) {
+
+    #memoryScreen .game-header {
+        height: 55px;
+    }
+
+    #memoryScreen .game-header h1 {
+        font-size: 30px;
+    }
+
+    .memory-info {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .memory-board {
+        height: 60vh;
+        gap: 10px;
+    }
+
+    #memoryScreen .feedback {
+        display: none;
+    }
+
+    #memoryScreen .primary-button {
+        margin-top: 5px;
+        padding: 9px 22px;
+        font-size: 17px;
     }
 
 }
@@ -858,7 +1038,7 @@ body {
         </div>
 
         <button class="primary-button"
-                onclick="openMemoryGame()">
+                onclick="createMemoryBoard()">
             NEW GAME
         </button>
 
@@ -869,6 +1049,7 @@ body {
 
 
 <script>
+
 
 /* =========================================================
    GENERAL NAVIGATION
@@ -888,11 +1069,14 @@ function resetInactivityTimer() {
 
 }
 
+
 function openGame(id) {
 
     document.querySelectorAll(".screen")
         .forEach(screen => {
+
             screen.classList.remove("active");
+
         });
 
     document.getElementById(id)
@@ -902,11 +1086,14 @@ function openGame(id) {
 
 }
 
+
 function goHome() {
 
     document.querySelectorAll(".screen")
         .forEach(screen => {
+
             screen.classList.remove("active");
+
         });
 
     document.getElementById("arcadeScreen")
@@ -917,6 +1104,7 @@ function goHome() {
     resetInactivityTimer();
 
 }
+
 
 document.addEventListener(
     "click",
@@ -932,6 +1120,7 @@ document.addEventListener(
     "mousemove",
     resetInactivityTimer
 );
+
 
 
 /* =========================================================
@@ -955,11 +1144,14 @@ const scrambleWords = [
 
 ];
 
+
 let currentScramble = "";
+
 
 function shuffleWord(word) {
 
-    let letters = word.split("");
+    let letters =
+        word.split("");
 
     for (
         let i = letters.length - 1;
@@ -967,9 +1159,11 @@ function shuffleWord(word) {
         i--
     ) {
 
-        let j = Math.floor(
-            Math.random() * (i + 1)
-        );
+        let j =
+            Math.floor(
+                Math.random() *
+                (i + 1)
+            );
 
         [
             letters[i],
@@ -985,6 +1179,7 @@ function shuffleWord(word) {
 
 }
 
+
 function newScramble() {
 
     currentScramble =
@@ -996,21 +1191,27 @@ function newScramble() {
         ];
 
     let scrambled =
-        shuffleWord(currentScramble);
+        shuffleWord(
+            currentScramble
+        );
 
     document.getElementById(
         "scrambledWord"
-    ).textContent = scrambled;
+    ).textContent =
+        scrambled;
 
     document.getElementById(
         "scrambleInput"
-    ).value = "";
+    ).value =
+        "";
 
     document.getElementById(
         "scrambleFeedback"
-    ).textContent = "";
+    ).textContent =
+        "";
 
 }
+
 
 function checkScramble() {
 
@@ -1026,7 +1227,10 @@ function checkScramble() {
             "scrambleFeedback"
         );
 
-    if (answer === currentScramble) {
+    if (
+        answer ===
+        currentScramble
+    ) {
 
         feedback.textContent =
             "✓ Correct! Great job!";
@@ -1046,6 +1250,7 @@ function checkScramble() {
 
 }
 
+
 newScramble();
 
 
@@ -1053,16 +1258,6 @@ newScramble();
 /* =========================================================
    GUESS THE BUILDING
 ========================================================= */
-
-/*
-   Replace the image paths below with your actual
-   STFX building photos.
-
-   Example:
-
-   image: "images/morrison.jpg"
-
-*/
 
 const buildings = [
 
@@ -1088,15 +1283,20 @@ const buildings = [
 
 ];
 
+
 let currentBuilding;
+
 
 function openBuildingGame() {
 
-    openGame("buildingScreen");
+    openGame(
+        "buildingScreen"
+    );
 
     loadBuilding();
 
 }
+
 
 function loadBuilding() {
 
@@ -1114,27 +1314,41 @@ function loadBuilding() {
         );
 
     image.innerHTML =
-        `<img src="${currentBuilding.image}"
-               style="
-               width:100%;
-               height:100%;
-               object-fit:cover;
-               border-radius:22px;"
-               onerror="
-               this.style.display='none';
-               this.parentElement.innerHTML='Building Photo';
-               ">`;
+        `<img
+            src="${currentBuilding.image}"
+            style="
+                width:100%;
+                height:100%;
+                object-fit:cover;
+                border-radius:22px;
+            "
+            onerror="
+                this.style.display='none';
+                this.parentElement.innerHTML='Building Photo';
+            "
+        >`;
+
 
     let options =
-        [...buildings]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 4);
+        [
+            ...buildings
+        ]
+        .sort(
+            () =>
+                Math.random() -
+                0.5
+        )
+        .slice(
+            0,
+            4
+        );
+
 
     if (
         !options.some(
             building =>
-            building.name ===
-            currentBuilding.name
+                building.name ===
+                currentBuilding.name
         )
     ) {
 
@@ -1143,17 +1357,23 @@ function loadBuilding() {
 
     }
 
+
     options =
         options.sort(
-            () => Math.random() - 0.5
+            () =>
+                Math.random() -
+                0.5
         );
+
 
     let container =
         document.getElementById(
             "buildingOptions"
         );
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
+
 
     options.forEach(
         building => {
@@ -1170,9 +1390,10 @@ function loadBuilding() {
                 building.name;
 
             button.onclick =
-                () => checkBuilding(
-                    building.name
-                );
+                () =>
+                    checkBuilding(
+                        building.name
+                    );
 
             container.appendChild(
                 button
@@ -1181,11 +1402,15 @@ function loadBuilding() {
         }
     );
 
+
     document.getElementById(
         "buildingFeedback"
-    ).textContent = "";
+    ).textContent =
+        "";
 
 }
+
+
 
 function checkBuilding(answer) {
 
@@ -1235,177 +1460,253 @@ const challengeQuestions = [
             "What does STFX stand for?",
 
         options: [
+
             "St. Francis Xavier University",
+
             "St. Thomas Francis Xavier",
+
             "Saint Xavier Technical Facility",
+
             "St. Francis Technology Exchange"
+
         ],
 
         answer:
             "St. Francis Xavier University"
+
     },
+
 
     {
         question:
             "Which town is StFX located in?",
 
         options: [
+
             "Antigonish",
+
             "Halifax",
+
             "Sydney",
+
             "Truro"
+
         ],
 
         answer:
             "Antigonish"
+
     },
+
 
     {
         question:
             "How many minutes are in one hour?",
 
         options: [
+
             "30",
+
             "45",
+
             "60",
+
             "90"
+
         ],
 
         answer:
             "60"
+
     },
+
 
     {
         question:
             "Which planet is known as the Red Planet?",
 
         options: [
+
             "Earth",
+
             "Mars",
+
             "Jupiter",
+
             "Venus"
+
         ],
 
         answer:
             "Mars"
+
     },
+
 
     {
         question:
             "What is 5 × 5?",
 
         options: [
+
             "15",
+
             "20",
+
             "25",
+
             "30"
+
         ],
 
         answer:
             "25"
+
     },
+
 
     {
         question:
             "Which ocean is the largest?",
 
         options: [
+
             "Atlantic Ocean",
+
             "Indian Ocean",
+
             "Arctic Ocean",
+
             "Pacific Ocean"
+
         ],
 
         answer:
             "Pacific Ocean"
+
     },
+
 
     {
         question:
             "What color do you get by mixing blue and yellow?",
 
         options: [
+
             "Purple",
+
             "Green",
+
             "Orange",
+
             "Red"
+
         ],
 
         answer:
             "Green"
+
     },
+
 
     {
         question:
             "How many days are in a week?",
 
         options: [
+
             "5",
+
             "6",
+
             "7",
+
             "8"
+
         ],
 
         answer:
             "7"
+
     }
 
 ];
 
+
 let challengeScore = 0;
+
 let challengeTime = 60;
+
 let challengeInterval;
+
 let currentQuestion;
+
 
 function openChallengeGame() {
 
-    openGame("challengeScreen");
+    openGame(
+        "challengeScreen"
+    );
 
     document.getElementById(
         "challengeStart"
-    ).style.display = "block";
+    ).style.display =
+        "block";
 
     document.getElementById(
         "challengeGame"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
     document.getElementById(
         "challengeOver"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 }
 
+
 function startChallenge() {
 
-    challengeScore = 0;
+    challengeScore =
+        0;
 
-    challengeTime = 60;
+    challengeTime =
+        60;
 
     document.getElementById(
         "challengeScore"
-    ).textContent = 0;
+    ).textContent =
+        0;
 
     document.getElementById(
         "timer"
-    ).textContent = 60;
+    ).textContent =
+        60;
 
     document.getElementById(
         "challengeStart"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
     document.getElementById(
         "challengeOver"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
     document.getElementById(
         "challengeGame"
-    ).style.display = "block";
+    ).style.display =
+        "block";
+
 
     loadChallengeQuestion();
+
 
     clearInterval(
         challengeInterval
     );
+
 
     challengeInterval =
         setInterval(
@@ -1417,6 +1718,7 @@ function startChallenge() {
                     "timer"
                 ).textContent =
                     challengeTime;
+
 
                 if (
                     challengeTime <= 0
@@ -1432,6 +1734,7 @@ function startChallenge() {
 
 }
 
+
 function loadChallengeQuestion() {
 
     currentQuestion =
@@ -1442,21 +1745,27 @@ function loadChallengeQuestion() {
             )
         ];
 
+
     document.getElementById(
         "challengeQuestion"
     ).textContent =
         currentQuestion.question;
+
 
     let container =
         document.getElementById(
             "challengeOptions"
         );
 
-    container.innerHTML = "";
+    container.innerHTML =
+        "";
+
 
     currentQuestion.options
         .sort(
-            () => Math.random() - 0.5
+            () =>
+                Math.random() -
+                0.5
         )
         .forEach(
             option => {
@@ -1473,9 +1782,10 @@ function loadChallengeQuestion() {
                     option;
 
                 button.onclick =
-                    () => answerChallenge(
-                        option
-                    );
+                    () =>
+                        answerChallenge(
+                            option
+                        );
 
                 container.appendChild(
                     button
@@ -1485,6 +1795,7 @@ function loadChallengeQuestion() {
         );
 
 }
+
 
 function answerChallenge(answer) {
 
@@ -1506,19 +1817,25 @@ function answerChallenge(answer) {
 
 }
 
+
 function endChallenge() {
 
     clearInterval(
         challengeInterval
     );
 
+
     document.getElementById(
         "challengeGame"
-    ).style.display = "none";
+    ).style.display =
+        "none";
+
 
     document.getElementById(
         "challengeOver"
-    ).style.display = "block";
+    ).style.display =
+        "block";
+
 
     document.getElementById(
         "finalChallengeScore"
@@ -1546,6 +1863,7 @@ const memorySymbols = [
 
 ];
 
+
 let memoryCards = [];
 
 let firstCard = null;
@@ -1557,28 +1875,45 @@ let lockBoard = false;
 let memoryMatches = 0;
 
 
+
 function openMemoryGame() {
 
-    openGame("memoryScreen");
+    openGame(
+        "memoryScreen"
+    );
 
     createMemoryBoard();
 
 }
 
 
+
 function createMemoryBoard() {
 
-    memoryMatches = 0;
+    memoryMatches =
+        0;
 
-    firstCard = null;
+    firstCard =
+        null;
 
-    secondCard = null;
+    secondCard =
+        null;
 
-    lockBoard = false;
+    lockBoard =
+        false;
+
 
     document.getElementById(
         "matches"
-    ).textContent = 0;
+    ).textContent =
+        0;
+
+
+    document.getElementById(
+        "memoryFeedback"
+    ).textContent =
+        "";
+
 
     let cards =
         [
@@ -1586,17 +1921,24 @@ function createMemoryBoard() {
             ...memorySymbols
         ];
 
+
     cards =
         cards.sort(
-            () => Math.random() - 0.5
+            () =>
+                Math.random() -
+                0.5
         );
+
 
     let board =
         document.getElementById(
             "memoryBoard"
         );
 
-    board.innerHTML = "";
+
+    board.innerHTML =
+        "";
+
 
     cards.forEach(
         symbol => {
@@ -1606,8 +1948,10 @@ function createMemoryBoard() {
                     "button"
                 );
 
+
             card.className =
                 "memory-card";
+
 
             card.innerHTML = `
 
@@ -1625,11 +1969,14 @@ function createMemoryBoard() {
 
             `;
 
+
             card.onclick =
-                () => flipCard(
-                    card,
-                    symbol
-                );
+                () =>
+                    flipCard(
+                        card,
+                        symbol
+                    );
+
 
             board.appendChild(
                 card
@@ -1641,27 +1988,40 @@ function createMemoryBoard() {
 }
 
 
-function flipCard(card, symbol) {
+
+function flipCard(
+    card,
+    symbol
+) {
 
     if (
+
         lockBoard ||
+
         card === firstCard ||
+
         card.classList.contains(
             "matched"
         )
+
     ) {
 
         return;
 
     }
 
+
     card.classList.add(
         "flipped"
     );
 
-    if (!firstCard) {
 
-        firstCard = card;
+    if (
+        !firstCard
+    ) {
+
+        firstCard =
+            card;
 
         card.dataset.symbol =
             symbol;
@@ -1670,21 +2030,28 @@ function flipCard(card, symbol) {
 
     }
 
-    secondCard = card;
+
+    secondCard =
+        card;
 
     card.dataset.symbol =
         symbol;
+
 
     checkMemoryMatch();
 
 }
 
 
+
 function checkMemoryMatch() {
 
     if (
+
         firstCard.dataset.symbol ===
+
         secondCard.dataset.symbol
+
     ) {
 
         firstCard.classList.add(
@@ -1695,14 +2062,18 @@ function checkMemoryMatch() {
             "matched"
         );
 
+
         memoryMatches++;
+
 
         document.getElementById(
             "matches"
         ).textContent =
             memoryMatches;
 
+
         resetMemoryTurn();
+
 
         if (
             memoryMatches === 8
@@ -1715,9 +2086,12 @@ function checkMemoryMatch() {
 
         }
 
+
     } else {
 
-        lockBoard = true;
+        lockBoard =
+            true;
+
 
         setTimeout(
             () => {
@@ -1730,6 +2104,7 @@ function checkMemoryMatch() {
                     "flipped"
                 );
 
+
                 resetMemoryTurn();
 
             },
@@ -1741,15 +2116,20 @@ function checkMemoryMatch() {
 }
 
 
+
 function resetMemoryTurn() {
 
-    firstCard = null;
+    firstCard =
+        null;
 
-    secondCard = null;
+    secondCard =
+        null;
 
-    lockBoard = false;
+    lockBoard =
+        false;
 
 }
+
 
 
 /* =========================================================
