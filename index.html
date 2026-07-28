@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +8,7 @@
 
 <title>STFX Mini Games</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -31,111 +30,95 @@
 
 body{
 
-    width:100%;
-    height:100vh;
+    min-height:100vh;
 
     background:
     linear-gradient(
-        rgba(0,40,90,.75),
-        rgba(0,27,68,.85)
-    ),
-    url("stfxcampus.jpg");
-
-    background-size:cover;
-    background-position:center;
+        135deg,
+        #003A70,
+        #0057B8,
+        #00A6D6
+    );
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
-    overflow:hidden;
+    padding:30px;
 
 }
 
 
 /* ========================= */
-/* MAIN CONTAINER */
+/* MAIN ARCADE AREA */
 /* ========================= */
 
-.container{
+.arcade{
 
-    width:90%;
-    max-width:900px;
+    width:100%;
 
-    background:white;
+    max-width:1000px;
 
-    border-radius:30px;
+    min-height:650px;
 
-    padding:45px 50px;
+    background:#F7F9FC;
+
+    border-radius:35px;
+
+    padding:35px 45px 45px;
 
     box-shadow:
-        0 25px 60px rgba(0,0,0,.25);
-
-    text-align:center;
+    0 25px 60px rgba(0,0,0,.3);
 
 }
 
 
 /* ========================= */
-/* LOGOS */
+/* HEADER */
 /* ========================= */
 
-.logos{
+.header{
 
     display:flex;
 
-    justify-content:center;
+    justify-content:space-between;
+
     align-items:center;
 
-    gap:35px;
-
-    margin-bottom:25px;
+    margin-bottom:35px;
 
 }
 
 
-.logos img{
-
-    height:80px;
-
-    width:auto;
-
-    max-width:300px;
-
-    object-fit:contain;
-
-}
-
-
-.sodexo-logo{
-
-    height:70px !important;
-
-}
-
-
-/* ========================= */
-/* TITLE */
-/* ========================= */
-
-h1{
-
-    color:#003A70;
+.title-area h1{
 
     font-size:42px;
 
-    margin-bottom:10px;
+    font-weight:800;
+
+    color:#003A70;
 
 }
 
 
-.subtitle{
+.title-area p{
 
     color:#666;
 
-    font-size:20px;
+    font-size:18px;
 
-    margin-bottom:35px;
+    margin-top:5px;
+
+}
+
+
+.logo{
+
+    height:65px;
+
+    width:auto;
 
 }
 
@@ -148,106 +131,233 @@ h1{
 
     display:grid;
 
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+    repeat(2,1fr);
 
-    gap:18px;
+    gap:25px;
 
 }
 
 
 /* ========================= */
-/* GAME BUTTONS */
+/* GAME CARDS */
 /* ========================= */
 
-.game-button{
+.game-card{
+
+    position:relative;
+
+    min-height:220px;
 
     border:none;
 
-    background:#F4F6F8;
+    border-radius:25px;
 
-    border:3px solid transparent;
+    padding:30px;
 
-    border-radius:20px;
-
-    padding:25px 15px;
-
-    color:#003A70;
+    text-align:left;
 
     cursor:pointer;
 
-    transition:.25s;
+    overflow:hidden;
+
+    transition:
+    transform .25s,
+    box-shadow .25s;
 
 }
 
 
-.game-button:hover{
+.game-card:hover{
 
-    background:#EEF5FF;
-
-    border-color:#0057B8;
-
-    transform:translateY(-5px);
+    transform:
+    translateY(-7px)
+    scale(1.02);
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.12);
+    0 15px 30px
+    rgba(0,0,0,.2);
 
 }
 
+
+.game-card:active{
+
+    transform:
+    translateY(-2px)
+    scale(.99);
+
+}
+
+
+/* ========================= */
+/* CARD CONTENT */
+/* ========================= */
 
 .game-icon{
 
-    font-size:42px;
+    font-size:55px;
 
-    display:block;
+    margin-bottom:15px;
+
+}
+
+
+.game-card h2{
+
+    font-size:25px;
+
+    color:white;
 
     margin-bottom:8px;
 
 }
 
 
-.game-title{
+.game-card p{
 
-    font-size:21px;
+    font-size:15px;
 
-    font-weight:600;
+    color:rgba(255,255,255,.9);
 
-}
-
-
-.game-description{
-
-    display:block;
-
-    color:#666;
-
-    font-size:14px;
-
-    margin-top:5px;
+    max-width:350px;
 
 }
 
 
 /* ========================= */
-/* MESSAGE */
+/* PLAY BUTTON */
 /* ========================= */
 
-#message{
+.play{
 
-    display:none;
+    position:absolute;
 
-    margin-top:30px;
+    right:25px;
 
-    padding:15px;
+    bottom:22px;
 
-    border-radius:15px;
-
-    background:#EEF5FF;
+    background:white;
 
     color:#003A70;
 
-    font-size:18px;
+    border-radius:30px;
+
+    padding:9px 18px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+
+/* ========================= */
+/* CARD COLORS */
+/* ========================= */
+
+.scramble{
+
+    background:
+    linear-gradient(
+        135deg,
+        #7B2CBF,
+        #C77DFF
+    );
+
+}
+
+
+.building{
+
+    background:
+    linear-gradient(
+        135deg,
+        #0077B6,
+        #00B4D8
+    );
+
+}
+
+
+.challenge{
+
+    background:
+    linear-gradient(
+        135deg,
+        #E85D04,
+        #F48C06
+    );
+
+}
+
+
+.memory{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2A9D8F,
+        #52B788
+    );
+
+}
+
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.footer{
+
+    margin-top:35px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+.footer p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+
+.back-button{
+
+    border:none;
+
+    background:#003A70;
+
+    color:white;
+
+    padding:12px 25px;
+
+    border-radius:30px;
+
+    font-size:15px;
 
     font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.back-button:hover{
+
+    background:#0057B8;
+
+    transform:scale(1.05);
 
 }
 
@@ -256,85 +366,68 @@ h1{
 /* MOBILE */
 /* ========================= */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-    .container{
+    body{
 
-        width:94%;
-
-        padding:30px 20px;
+        padding:15px;
 
     }
 
 
-    .logos{
+    .arcade{
 
-        gap:20px;
+        padding:25px;
 
-    }
-
-
-    .logos img{
-
-        height:55px;
+        min-height:auto;
 
     }
 
 
-    .sodexo-logo{
+    .header{
 
-        height:48px !important;
+        flex-direction:column;
 
-    }
+        text-align:center;
 
-
-    h1{
-
-        font-size:30px;
+        gap:15px;
 
     }
 
 
-    .subtitle{
-
-        font-size:16px;
-
-        margin-bottom:25px;
-
-    }
-
-
-    .game-grid{
-
-        gap:10px;
-
-    }
-
-
-    .game-button{
-
-        padding:18px 8px;
-
-    }
-
-
-    .game-icon{
+    .title-area h1{
 
         font-size:32px;
 
     }
 
 
-    .game-title{
+    .title-area p{
 
-        font-size:16px;
+        font-size:15px;
 
     }
 
 
-    .game-description{
+    .game-grid{
 
-        font-size:11px;
+        grid-template-columns:1fr;
+
+    }
+
+
+    .game-card{
+
+        min-height:190px;
+
+    }
+
+
+    .footer{
+
+        flex-direction:column;
+
+        gap:15px;
 
     }
 
@@ -348,147 +441,130 @@ h1{
 <body>
 
 
-<div class="container">
+<!-- ========================= -->
+<!-- MAIN MINI GAME ARCADE -->
+<!-- ========================= -->
+
+<div class="arcade">
 
 
-    <!-- ========================= -->
-    <!-- LOGOS -->
-    <!-- ========================= -->
+    <!-- HEADER -->
 
-    <div class="logos">
+    <div class="header">
+
+        <div class="title-area">
+
+            <h1>🎮 Mini Game Zone</h1>
+
+            <p>Pick a game and see how well you can do!</p>
+
+        </div>
+
 
         <img
             src="STFXlogo.png"
+            class="logo"
             alt="StFX Logo">
-
-        <img
-            src="logo.png"
-            alt="Sodexo Logo"
-            class="sodexo-logo">
 
     </div>
 
 
-    <!-- ========================= -->
-    <!-- TITLE -->
-    <!-- ========================= -->
 
-    <h1>
-
-        🎮 STFX Mini Games
-
-    </h1>
-
-
-    <p class="subtitle">
-
-        Pick a game and see how high you can score!
-
-    </p>
-
-
-    <!-- ========================= -->
-    <!-- GAME BUTTONS -->
-    <!-- ========================= -->
+    <!-- GAME OPTIONS -->
 
     <div class="game-grid">
 
 
+        <!-- WORD SCRAMBLE -->
+
         <button
-            class="game-button"
-            onclick="openGame('scramble')">
+            class="game-card scramble"
+            onclick="startGame('scramble')">
 
-            <span class="game-icon">
-
+            <div class="game-icon">
                 🔤
+            </div>
 
-            </span>
+            <h2>Word Scramble</h2>
 
-            <span class="game-title">
+            <p>
+                Unscramble the letters and find the hidden word!
+            </p>
 
-                Word Scramble
-
-            </span>
-
-            <span class="game-description">
-
-                Unscramble the word!
-
+            <span class="play">
+                Play →
             </span>
 
         </button>
 
 
+
+        <!-- STFX BUILDING -->
+
         <button
-            class="game-button"
-            onclick="openGame('building')">
+            class="game-card building"
+            onclick="startGame('building')">
 
-            <span class="game-icon">
-
+            <div class="game-icon">
                 🏫
+            </div>
 
-            </span>
+            <h2>Guess the Building</h2>
 
-            <span class="game-title">
+            <p>
+                Can you recognize StFX's buildings and residences?
+            </p>
 
-                Guess the Building
-
-            </span>
-
-            <span class="game-description">
-
-                Can you recognize StFX?
-
+            <span class="play">
+                Play →
             </span>
 
         </button>
 
 
+
+        <!-- 60 SECOND CHALLENGE -->
+
         <button
-            class="game-button"
-            onclick="openGame('challenge')">
+            class="game-card challenge"
+            onclick="startGame('challenge')">
 
-            <span class="game-icon">
+            <div class="game-icon">
+                ⏱️
+            </div>
 
-                ⚡
+            <h2>60 Second Challenge</h2>
 
-            </span>
+            <p>
+                Answer as many questions as you can before time runs out!
+            </p>
 
-            <span class="game-title">
-
-                60-Second Challenge
-
-            </span>
-
-            <span class="game-description">
-
-                How many can you answer?
-
+            <span class="play">
+                Play →
             </span>
 
         </button>
 
 
+
+        <!-- MEMORY MATCH -->
+
         <button
-            class="game-button"
-            onclick="openGame('memory')">
+            class="game-card memory"
+            onclick="startGame('memory')">
 
-            <span class="game-icon">
-
+            <div class="game-icon">
                 🧠
+            </div>
 
-            </span>
+            <h2>Memory Match</h2>
 
-            <span class="game-title">
+            <p>
+                Flip the cards and find all the matching pairs!
+            </p>
 
-                Memory Match
-
-            </span>
-
-            <span class="game-description">
-
-                Find all the matching pairs!
-
+            <span class="play">
+                Play →
             </span>
 
         </button>
@@ -497,62 +573,73 @@ h1{
     </div>
 
 
-    <!-- ========================= -->
-    <!-- TEMPORARY MESSAGE -->
-    <!-- ========================= -->
 
-    <div id="message"></div>
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <p>
+            🎉 Have fun and challenge yourself!
+        </p>
+
+
+        <button
+            class="back-button"
+            onclick="goBack()">
+
+            ← Back
+
+        </button>
+
+    </div>
 
 
 </div>
 
 
+
 <script>
 
-
 /* ========================= */
-/* OPEN GAME */
+/* START GAME */
 /* ========================= */
 
-function openGame(game){
-
-    const message =
-        document.getElementById("message");
-
+function startGame(game){
 
     if(game === "scramble"){
 
-        message.textContent =
-            "🔤 Word Scramble coming soon!";
+        alert("Word Scramble coming soon!");
 
     }
-
 
     else if(game === "building"){
 
-        message.textContent =
-            "🏫 Guess the Building coming soon!";
+        alert("Guess the Building coming soon!");
 
     }
-
 
     else if(game === "challenge"){
 
-        message.textContent =
-            "⚡ 60-Second Challenge coming soon!";
+        alert("60 Second Challenge coming soon!");
 
     }
-
 
     else if(game === "memory"){
 
-        message.textContent =
-            "🧠 Memory Match coming soon!";
+        alert("Memory Match coming soon!");
 
     }
 
+}
 
-    message.style.display = "block";
+
+/* ========================= */
+/* BACK BUTTON */
+/* ========================= */
+
+function goBack(){
+
+    window.location.href = "index.html";
 
 }
 
@@ -562,5 +649,3 @@ function openGame(game){
 </body>
 
 </html>
-```
-
