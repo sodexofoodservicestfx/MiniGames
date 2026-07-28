@@ -104,27 +104,35 @@ body {
 }
 
 .game-grid {
-    flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    gap: 25px;
-    max-width: 1250px;
+    gap: 20px;
+
     width: 100%;
+    max-width: 1100px;
+
+    height: 65vh;
+    max-height: 600px;
+
     margin: auto;
 }
 
 .game-card {
     border: none;
-    border-radius: 28px;
+    border-radius: 22px;
     color: white;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     text-align: left;
-    padding: 35px;
+
+    padding: 25px;
+
     transition: transform 0.15s ease;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.35);
 }
 
 .game-card:active {
@@ -600,10 +608,11 @@ body {
         padding: 20px;
     }
 
-    .arcade-title h1 {
-        font-size: 35px;
-    }
-
+   .arcade-title h1 {
+    font-size: 44px;
+    letter-spacing: 3px;
+    font-weight: 800;
+}
     .game-grid {
         gap: 12px;
     }
@@ -613,17 +622,21 @@ body {
         border-radius: 18px;
     }
 
-    .game-icon {
-        font-size: 40px;
-    }
+   .game-icon {
+    font-size: 50px;
+    margin-bottom: 8px;
+}
 
-    .game-card h2 {
-        font-size: 21px;
-    }
+  .game-card h2 {
+    font-size: 27px;
+    margin-bottom: 8px;
+}
 
-    .game-card p {
-        font-size: 14px;
-    }
+
+   .game-card p {
+    font-size: 16px;
+    max-width: 400px;
+}
 
     .play-label {
         bottom: 15px;
