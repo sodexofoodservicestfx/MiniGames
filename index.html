@@ -96,7 +96,7 @@ body {
 
     letter-spacing: 6px;
 
-    margin-bottom: 30px;
+      margin-bottom: 70px;
 }
 
 
@@ -147,12 +147,7 @@ body {
 #arcadeScreen {
     flex-direction: column;
     align-items: center;
-
-    /* This moves the title down from the very top */
-    padding:
-        80px
-        60px
-        40px;
+    padding: 0 60px 40px;
 }
 
 
@@ -168,12 +163,11 @@ body {
     justify-content: center;
 
     width: 100%;
-    max-width: 1100px;
 
-    margin:
-        0
-        auto
-        30px;
+    /* This controls the space above the tabs */
+    height: 35vh;
+
+    margin: 0;
 }
 
 .logo-area {
@@ -186,14 +180,15 @@ body {
 }
 
 .arcade-title h1 {
-    font-size: 52px;
-    letter-spacing: 3px;
+    font-size: 75px;
+    letter-spacing: 5px;
     font-weight: 800;
+    margin: 0;
 }
 
 .arcade-title p {
-    margin-top: 10px;
-    font-size: 22px;
+    margin-top: 12px;
+    font-size: 24px;
     color: #b9d7ed;
 }
 
@@ -203,27 +198,21 @@ body {
 ========================================================= */
 
 .game-grid {
+    flex: none;
+
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
 
-    grid-template-columns:
-        1fr
-        1fr;
+    gap: 25px;
 
-    grid-template-rows:
-        1fr
-        1fr;
-
-    gap: 20px;
-
+    max-width: 1250px;
     width: 100%;
-    max-width: 1100px;
 
-    height: 65vh;
-    max-height: 600px;
+    height: 55vh;
 
-    margin: auto;
+    margin: 0 auto;
 }
-
 
 /* =========================================================
    GAME CARDS
@@ -944,9 +933,7 @@ body {
             MINI GAMES
         </h1>
 
-        <p>
-            Welcome! Test your knowledge, memory, and skills.
-        </p>
+       
 
         <button class="start-arcade-button"
                 onclick="openArcade()">
