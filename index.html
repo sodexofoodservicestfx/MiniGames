@@ -71,7 +71,6 @@ body {
     padding: 60px;
 }
 
-
 .welcome-logos {
     display: flex;
     align-items: center;
@@ -85,60 +84,45 @@ body {
 .welcome-logos img {
     max-width: 360px;
     max-height: 190px;
-
     object-fit: contain;
 }
 
 .welcome-content h1 {
     font-size: 105px;
-
     font-weight: 800;
-
     letter-spacing: 6px;
-
     margin-bottom: 70px;
 }
-
 
 .welcome-content p {
     font-size: 40px;
-
     color: #b9d7ed;
-
     margin-bottom: 70px;
 }
 
-
 .start-arcade-button {
-    padding:
-        35px
-        100px;
+    padding: 35px 100px;
 
     border: none;
-
     border-radius: 60px;
 
     background: white;
-
     color: #123f70;
 
     font-size: 40px;
-
     font-weight: bold;
 
     cursor: pointer;
 
     box-shadow:
-        0 12px 35px
-        rgba(0,0,0,0.4);
+        0 12px 35px rgba(0,0,0,0.4);
 
     transition:
         transform 0.15s ease;
 }
 
 .start-arcade-button:active {
-    transform:
-        scale(0.96);
+    transform: scale(0.96);
 }
 
 
@@ -151,54 +135,47 @@ body {
     align-items: center;
     justify-content: flex-start;
 
-    padding: 20px 50px 35px;
+    padding: 0 50px 40px;
+
+    min-height: 100vh;
 }
 
 
 /* =========================================================
-   TITLE
+   MINI GAMES TITLE
 ========================================================= */
 
 .arcade-header {
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     width: 100%;
 
-    /* Controls where the title sits vertically */
-    height: 230px;
+    /*
+       Keeps the title centered between
+       the top of the screen and the tabs
+    */
+    height: 280px;
 
-    margin: 0;
-}
-
-.logo-area {
-    display: none;
+    flex-shrink: 0;
 }
 
 .arcade-title {
     text-align: center;
-
     width: 100%;
 }
 
 .arcade-title h1 {
-    font-size: 75px;
-
+    font-size: 90px;
     letter-spacing: 5px;
-
     font-weight: 800;
-
     margin: 0;
 }
 
 .arcade-title p {
-    margin-top: 12px;
-
-    font-size: 24px;
-
+    margin-top: 18px;
+    font-size: 28px;
     color: #b9d7ed;
 }
 
@@ -210,80 +187,110 @@ body {
 .game-grid {
     display: grid;
 
-    grid-template-columns:
-        520px
-        520px;
+    grid-template-columns: 600px 600px;
+    grid-template-rows: 230px 230px;
 
-    grid-template-rows:
-        190px
-        190px;
+    gap: 30px;
 
-    gap: 22px;
-
-    width: 1062px;
-
-    height: auto;
+    width: 1230px;
 
     margin: 0 auto;
 }
 
 
 /* =========================================================
-   GAME CARDS
+   GAME CARDS / TABS
 ========================================================= */
 
 .game-card {
-    width: 520px;
-
-    height: 190px;
+    width: 600px;
+    height: 230px;
 
     border: none;
-
-    border-radius: 28px;
+    border-radius: 30px;
 
     color: white;
 
     cursor: pointer;
 
     position: relative;
-
     overflow: hidden;
 
     text-align: left;
 
-    padding: 30px;
+    padding: 32px;
 
     box-shadow:
-        0 12px 30px
-        rgba(0,0,0,0.35);
+        0 12px 30px rgba(0,0,0,0.35);
 
     transition:
         transform 0.15s ease;
 }
 
 .game-card:active {
-    transform:
-        scale(0.97);
+    transform: scale(0.97);
 }
 
+
+/* =========================================================
+   GAME CARD CONTENT
+========================================================= */
+
+.game-icon {
+    font-size: 50px;
+    margin-bottom: 8px;
+}
+
+.game-card h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.game-card p {
+    font-size: 19px;
+    max-width: 470px;
+    color: rgba(255,255,255,0.85);
+}
+
+.play-label {
+    position: absolute;
+
+    bottom: 25px;
+    right: 28px;
+
+    background:
+        rgba(255,255,255,0.18);
+
+    padding: 11px 22px;
+
+    border-radius: 30px;
+
+    font-size: 17px;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   CARD DECORATION
+========================================================= */
 
 .game-card::after {
     content: "";
 
     position: absolute;
 
-    width: 220px;
-
-    height: 220px;
+    width: 230px;
+    height: 230px;
 
     border-radius: 50%;
 
     right: -60px;
-
     bottom: -80px;
 
     background:
         rgba(255,255,255,0.08);
+
+    pointer-events: none;
 }
 
 
@@ -325,51 +332,6 @@ body {
             #5427a3,
             #8e44c7
         );
-}
-
-
-/* =========================================================
-   GAME CARD CONTENT
-========================================================= */
-
-.game-icon {
-    font-size: 45px;
-
-    margin-bottom: 5px;
-}
-
-.game-card h2 {
-    font-size: 28px;
-
-    margin-bottom: 8px;
-}
-
-.game-card p {
-    font-size: 17px;
-
-    max-width: 400px;
-
-    color:
-        rgba(255,255,255,0.85);
-}
-
-.play-label {
-    position: absolute;
-
-    bottom: 22px;
-
-    right: 25px;
-
-    background:
-        rgba(255,255,255,0.18);
-
-    padding:
-        10px
-        20px;
-
-    border-radius: 30px;
-
-    font-weight: bold;
 }
 
 
@@ -594,8 +556,7 @@ body {
 }
 
 .building-option:active {
-    transform:
-        scale(0.97);
+    transform: scale(0.97);
 }
 
 
@@ -712,10 +673,7 @@ body {
     display: grid;
 
     grid-template-columns:
-        repeat(
-            4,
-            110px
-        );
+        repeat(4, 110px);
 
     gap: 15px;
 }
@@ -832,13 +790,11 @@ body {
 
     .welcome-logos {
         gap: 35px;
-
         margin-bottom: 35px;
     }
 
     .welcome-logos img {
         max-width: 170px;
-
         max-height: 90px;
     }
 
@@ -859,9 +815,7 @@ body {
     }
 
 
-    /* =====================================================
-       MINI GAMES PAGE
-    ===================================================== */
+    /* MINI GAMES PAGE */
 
     #arcadeScreen {
         padding:
@@ -872,8 +826,6 @@ body {
 
     .arcade-header {
         height: 170px;
-
-        margin: 0;
     }
 
     .arcade-title h1 {
@@ -935,9 +887,7 @@ body {
     }
 
 
-    /* =====================================================
-       OTHER GAMES
-    ===================================================== */
+    /* OTHER GAMES */
 
     .scramble-word {
         font-size: 45px;
@@ -945,10 +895,7 @@ body {
 
     .memory-board {
         grid-template-columns:
-            repeat(
-                4,
-                75px
-            );
+            repeat(4, 75px);
 
         gap: 8px;
     }
@@ -970,33 +917,57 @@ body {
 
     #arcadeScreen {
         padding:
-            20px
+            0
             50px
-            35px;
+            40px;
     }
 
+    /*
+       Larger title area.
+       This keeps the title centered
+       above the game tabs.
+    */
+
     .arcade-header {
-        height: 230px;
+        height: 280px;
     }
+
+    .arcade-title h1 {
+        font-size: 90px;
+    }
+
+    .arcade-title p {
+        font-size: 28px;
+    }
+
+    /*
+       Bigger game tabs.
+       The 2 x 2 grid is centered.
+    */
 
     .game-grid {
         grid-template-columns:
-            520px
-            520px;
+            600px
+            600px;
 
         grid-template-rows:
-            190px
-            190px;
+            230px
+            230px;
 
-        gap: 22px;
+        gap: 30px;
 
-        width: 1062px;
+        width: 1230px;
+
+        margin:
+            0
+            auto;
     }
 
     .game-card {
-        width: 520px;
+        width: 600px;
+        height: 230px;
 
-        height: 190px;
+        padding: 32px;
     }
 
 }
@@ -1004,7 +975,6 @@ body {
 
 /* =========================================================
    30 SECOND INACTIVITY TIMER
-   RETURNS TO WELCOME SCREEN
 ========================================================= */
 
 </style>
@@ -1217,9 +1187,7 @@ body {
 
 
         <div class="scramble-info">
-
             Unscramble this word:
-
         </div>
 
 
@@ -1352,7 +1320,6 @@ body {
 
         <div id="challengeStart">
 
-
             <h2 style="
                 font-size:40px;
                 margin-bottom:20px;
@@ -1379,7 +1346,6 @@ body {
                 START!
 
             </button>
-
 
         </div>
 
@@ -1545,7 +1511,6 @@ let inactivityTimer;
 
 /* =========================================================
    30 SECOND INACTIVITY TIMER
-   RETURNS TO WELCOME SCREEN
 ========================================================= */
 
 function resetInactivityTimer() {
@@ -1553,7 +1518,6 @@ function resetInactivityTimer() {
     clearTimeout(
         inactivityTimer
     );
-
 
     inactivityTimer =
         setTimeout(
@@ -1578,7 +1542,6 @@ function goToWelcome() {
         challengeInterval
     );
 
-
     document.querySelectorAll(".screen")
         .forEach(
             screen => {
@@ -1590,13 +1553,11 @@ function goToWelcome() {
             }
         );
 
-
     document.getElementById(
         "arcadeWelcomeScreen"
     ).classList.add(
         "active"
     );
-
 
     resetInactivityTimer();
 
@@ -1620,13 +1581,11 @@ function openArcade() {
             }
         );
 
-
     document.getElementById(
         "arcadeScreen"
     ).classList.add(
         "active"
     );
-
 
     resetInactivityTimer();
 
@@ -1650,13 +1609,11 @@ function openGame(id) {
             }
         );
 
-
     document.getElementById(
         id
     ).classList.add(
         "active"
     );
-
 
     resetInactivityTimer();
 
@@ -1680,18 +1637,15 @@ function goHome() {
             }
         );
 
-
     document.getElementById(
         "arcadeScreen"
     ).classList.add(
         "active"
     );
 
-
     clearInterval(
         challengeInterval
     );
-
 
     resetInactivityTimer();
 
@@ -1744,9 +1698,7 @@ const scrambleWords = [
 let currentScramble = "";
 
 
-function shuffleWord(
-    word
-) {
+function shuffleWord(word) {
 
     let letters =
         word.split("");
@@ -1760,7 +1712,6 @@ function shuffleWord(
 
         i--
     ) {
-
 
         let j =
             Math.floor(
@@ -1845,7 +1796,6 @@ function checkScramble() {
         currentScramble
     ) {
 
-
         feedback.textContent =
             "✓ Correct! Great job!";
 
@@ -1853,11 +1803,9 @@ function checkScramble() {
         feedback.style.color =
             "#76e6a2";
 
-
     }
 
     else {
-
 
         feedback.textContent =
             "✗ Not quite. Try again!";
@@ -1865,7 +1813,6 @@ function checkScramble() {
 
         feedback.style.color =
             "#ff9b9b";
-
 
     }
 
@@ -1928,7 +1875,6 @@ function openBuildingGame() {
     openGame(
         "buildingScreen"
     );
-
 
     loadBuilding();
 
@@ -1996,10 +1942,8 @@ function loadBuilding() {
         )
     ) {
 
-
         options[0] =
             currentBuilding;
-
 
     }
 
@@ -2024,7 +1968,6 @@ function loadBuilding() {
 
     options.forEach(
         building => {
-
 
             let button =
                 document.createElement(
@@ -2051,7 +1994,6 @@ function loadBuilding() {
                 button
             );
 
-
         }
     );
 
@@ -2064,9 +2006,7 @@ function loadBuilding() {
 }
 
 
-function checkBuilding(
-    answer
-) {
+function checkBuilding(answer) {
 
     let feedback =
         document.getElementById(
@@ -2078,7 +2018,6 @@ function checkBuilding(
         answer ===
         currentBuilding.name
     ) {
-
 
         feedback.textContent =
             "✓ Correct!";
@@ -2093,11 +2032,9 @@ function checkBuilding(
             1200
         );
 
-
     }
 
     else {
-
 
         feedback.textContent =
             "✗ Try again!";
@@ -2105,7 +2042,6 @@ function checkBuilding(
 
         feedback.style.color =
             "#ff9b9b";
-
 
     }
 
@@ -2379,7 +2315,6 @@ function startChallenge() {
         setInterval(
             () => {
 
-
                 challengeTime--;
 
 
@@ -2394,12 +2329,9 @@ function startChallenge() {
                     0
                 ) {
 
-
                     endChallenge();
 
-
                 }
-
 
             },
             1000
@@ -2444,7 +2376,6 @@ function loadChallengeQuestion() {
         .forEach(
             option => {
 
-
                 let button =
                     document.createElement(
                         "button"
@@ -2470,22 +2401,18 @@ function loadChallengeQuestion() {
                     button
                 );
 
-
             }
         );
 
 }
 
 
-function answerChallenge(
-    answer
-) {
+function answerChallenge(answer) {
 
     if (
         answer ===
         currentQuestion.answer
     ) {
-
 
         challengeScore++;
 
@@ -2494,7 +2421,6 @@ function answerChallenge(
             "challengeScore"
         ).textContent =
             challengeScore;
-
 
     }
 
@@ -2539,19 +2465,12 @@ function endChallenge() {
 const memorySymbols = [
 
     "🏛️",
-
     "⭐",
-
     "📚",
-
     "🎓",
-
     "🍎",
-
     "🏐",
-
     "☕",
-
     "🌊"
 
 ];
@@ -2578,7 +2497,6 @@ function openMemoryGame() {
     openGame(
         "memoryScreen"
     );
-
 
     createMemoryBoard();
 
@@ -2647,7 +2565,6 @@ function createMemoryBoard() {
     cards.forEach(
         symbol => {
 
-
             let card =
                 document.createElement(
                     "button"
@@ -2687,7 +2604,6 @@ function createMemoryBoard() {
                 card
             );
 
-
         }
     );
 
@@ -2695,11 +2611,7 @@ function createMemoryBoard() {
 
 
 
-function flipCard(
-    card,
-    symbol
-) {
-
+function flipCard(card, symbol) {
 
     if (
 
@@ -2726,7 +2638,6 @@ function flipCard(
     if (
         !firstCard
     ) {
-
 
         firstCard =
             card;
@@ -2757,7 +2668,6 @@ function flipCard(
 
 function checkMemoryMatch() {
 
-
     if (
 
         firstCard.dataset.symbol ===
@@ -2765,7 +2675,6 @@ function checkMemoryMatch() {
         secondCard.dataset.symbol
 
     ) {
-
 
         firstCard.classList.add(
             "matched"
@@ -2794,20 +2703,16 @@ function checkMemoryMatch() {
             8
         ) {
 
-
             document.getElementById(
                 "memoryFeedback"
             ).textContent =
                 "🎉 You found them all!";
 
-
         }
-
 
     }
 
     else {
-
 
         lockBoard =
             true;
@@ -2815,7 +2720,6 @@ function checkMemoryMatch() {
 
         setTimeout(
             () => {
-
 
                 firstCard.classList.remove(
                     "flipped"
@@ -2828,7 +2732,6 @@ function checkMemoryMatch() {
 
 
                 resetMemoryTurn();
-
 
             },
             900
@@ -2858,7 +2761,7 @@ function resetMemoryTurn() {
 
 
 /* =========================================================
-   START TIMER
+   START 30 SECOND INACTIVITY TIMER
 ========================================================= */
 
 resetInactivityTimer();
