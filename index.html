@@ -9,7 +9,7 @@
       content="width=device-width, initial-scale=1.0,
                maximum-scale=1.0, user-scalable=no">
 
-<title>STFX Mini Game Arcade</title>
+<title>STFX Mini Games</title>
 
 
 <style>
@@ -121,50 +121,46 @@ body {
 
 
 /* =========================================================
-   ARCADE HOME
+   MINI GAMES HOME
 ========================================================= */
 
 #arcadeScreen {
     flex-direction: column;
+    align-items: center;
 
     padding:
-        50px
+        45px
         60px
         35px;
 }
 
+
+/* =========================================================
+   CENTERED TITLE
+========================================================= */
+
 .arcade-header {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
     width: 100%;
-    max-width: 1250px;
+    max-width: 1100px;
 
     margin:
-        20px
+        0
         auto
-        30px;
+        25px;
 }
 
 .logo-area {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.logo-area img {
-    max-height: 65px;
-    max-width: 150px;
-    object-fit: contain;
+    display: none;
 }
 
 .arcade-title {
     text-align: center;
-    flex: 1;
-    padding:
-        0
-        25px;
+    width: 100%;
 }
 
 .arcade-title h1 {
@@ -174,7 +170,7 @@ body {
 }
 
 .arcade-title p {
-    margin-top: 7px;
+    margin-top: 8px;
     font-size: 20px;
     color: #b9d7ed;
 }
@@ -287,13 +283,6 @@ body {
             #b94d87
         );
 }
-
-
-/* IMPORTANT:
-   This is the Memory Match HOME TAB.
-   It has a different class so it does not conflict
-   with the actual memory cards inside the game.
-*/
 
 .memory-game-tab {
     background:
@@ -691,12 +680,6 @@ body {
     gap: 15px;
 }
 
-
-/* IMPORTANT:
-   This controls the actual cards inside
-   the Memory Match game.
-*/
-
 .memory-card {
     width: 110px;
 
@@ -799,7 +782,7 @@ body {
 
 
 /* =========================================================
-   MOBILE / SMALL SCREEN
+   SMALL SCREEN
 ========================================================= */
 
 @media (max-width: 800px) {
@@ -828,6 +811,7 @@ body {
 
     .start-arcade-button {
         font-size: 20px;
+
         padding:
             16px
             40px;
@@ -947,7 +931,7 @@ body {
     <div class="welcome-content">
 
         <h1>
-            MINI GAME ARCADE
+            MINI GAMES
         </h1>
 
         <p>
@@ -969,7 +953,7 @@ body {
 
 
 <!-- =======================================================
-     ARCADE HOME
+     MINI GAMES HOME
 ======================================================= -->
 
 <section id="arcadeScreen"
@@ -978,19 +962,10 @@ body {
 
     <div class="arcade-header">
 
-
-        <div class="logo-area">
-
-            <img src="STFXlog.png"
-                 alt="STFX Logo">
-
-        </div>
-
-
         <div class="arcade-title">
 
             <h1>
-                MINI GAME ARCADE
+                MINI GAMES
             </h1>
 
             <p>
@@ -998,15 +973,6 @@ body {
             </p>
 
         </div>
-
-
-        <div class="logo-area">
-
-            <img src="logo.png"
-                 alt="Sodexo Logo">
-
-        </div>
-
 
     </div>
 
@@ -1138,7 +1104,7 @@ body {
         <button class="back-button"
                 onclick="goHome()">
 
-            ← Arcade
+            ← Back
 
         </button>
 
@@ -1213,7 +1179,7 @@ body {
         <button class="back-button"
                 onclick="goHome()">
 
-            ← Arcade
+            ← Back
 
         </button>
 
@@ -1272,7 +1238,7 @@ body {
         <button class="back-button"
                 onclick="goHome()">
 
-            ← Arcade
+            ← Back
 
         </button>
 
@@ -1416,7 +1382,7 @@ body {
         <button class="back-button"
                 onclick="goHome()">
 
-            ← Arcade
+            ← Back
 
         </button>
 
@@ -1487,13 +1453,13 @@ function resetInactivityTimer() {
 
         goHome();
 
-    }, 30000);
+    }, 20000);
 
 }
 
 
 /* =========================================================
-   OPEN ARCADE FROM WELCOME SCREEN
+   OPEN MINI GAMES
 ========================================================= */
 
 function openArcade() {
@@ -1540,7 +1506,7 @@ function openGame(id) {
 
 
 /* =========================================================
-   RETURN TO ARCADE HOME
+   RETURN TO MINI GAMES HOME
 ========================================================= */
 
 function goHome() {
