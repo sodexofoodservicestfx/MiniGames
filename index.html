@@ -1,705 +1,1765 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+               maximum-scale=1.0, user-scalable=no">
 
-<title>STFX Mini Game Zone</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<title>STFX Mini Game Arcade</title>
 
 <style>
 
-/* ========================= */
-/* GENERAL */
-/* ========================= */
+/* =========================================================
+   GLOBAL
+========================================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
-/* ========================= */
-/* BODY */
-/* ========================= */
-
-body{
-
-    width:100%;
-    height:100vh;
-
-    overflow:hidden;
-
+body {
     background:
-    linear-gradient(
-        135deg,
-        #003A70,
-        #0057B8,
-        #0077C8
-    );
-
-    color:white;
-
-    position:relative;
-
+        radial-gradient(circle at top left, #173d6b, transparent 35%),
+        radial-gradient(circle at bottom right, #0b4d59, transparent 35%),
+        #071525;
+    color: white;
 }
 
+/* =========================================================
+   SCREEN SYSTEM
+========================================================= */
 
-/* ========================= */
-/* BACKGROUND SHAPES */
-/* ========================= */
-
-body::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:500px;
-    height:500px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.06);
-
-    top:-200px;
-    left:-150px;
-
+.screen {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
 }
 
-
-body::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:600px;
-    height:600px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,.05);
-
-    bottom:-350px;
-    right:-200px;
-
+.screen.active {
+    display: flex;
 }
 
+/* =========================================================
+   ARCADE HOME
+========================================================= */
 
-/* ========================= */
-/* MAIN PAGE */
-/* ========================= */
-
-.game-page{
-
-    position:relative;
-
-    z-index:1;
-
-    width:100%;
-    height:100%;
-
-    padding:35px 60px;
-
-    display:flex;
-
-    flex-direction:column;
-
+#arcadeScreen {
+    flex-direction: column;
+    padding: 35px 60px;
 }
 
-
-/* ========================= */
-/* TOP BAR */
-/* ========================= */
-
-.top-bar{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:25px;
-
+.arcade-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
 }
 
-
-.logo-area{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
-
-.logo-area img{
-
-    height:60px;
-
-    width:auto;
-
-    object-fit:contain;
-
+.logo-area img {
+    max-height: 65px;
+    max-width: 150px;
+    object-fit: contain;
 }
 
-
-.sodexo-logo{
-
-    height:50px !important;
-
+.arcade-title {
+    text-align: center;
+    flex: 1;
 }
 
-
-.home-button{
-
-    border:none;
-
-    background:rgba(255,255,255,.15);
-
-    color:white;
-
-    padding:12px 22px;
-
-    border-radius:30px;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.25s;
-
+.arcade-title h1 {
+    font-size: 52px;
+    letter-spacing: 3px;
+    font-weight: 800;
 }
 
-
-.home-button:hover{
-
-    background:rgba(255,255,255,.25);
-
-    transform:scale(1.05);
-
+.arcade-title p {
+    margin-top: 7px;
+    font-size: 20px;
+    color: #b9d7ed;
 }
 
-
-/* ========================= */
-/* TITLE */
-/* ========================= */
-
-.title-section{
-
-    text-align:center;
-
-    margin-bottom:35px;
-
+.game-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 25px;
+    max-width: 1250px;
+    width: 100%;
+    margin: auto;
 }
 
-
-.title-section h1{
-
-    font-size:52px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-
-    text-shadow:0 4px 10px rgba(0,0,0,.2);
-
+.game-card {
+    border: none;
+    border-radius: 28px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
+    padding: 35px;
+    transition: transform 0.15s ease;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
-
-.title-section p{
-
-    font-size:20px;
-
-    margin-top:5px;
-
-    opacity:.9;
-
+.game-card:active {
+    transform: scale(0.97);
 }
 
-
-/* ========================= */
-/* GAME GRID */
-/* ========================= */
-
-.game-grid{
-
-    flex:1;
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:22px;
-
-    max-width:1100px;
-
-    width:100%;
-
-    margin:0 auto;
-
+.game-card::after {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    right: -60px;
+    bottom: -80px;
+    background: rgba(255,255,255,0.08);
 }
 
-
-/* ========================= */
-/* GAME CARDS */
-/* ========================= */
-
-.game-card{
-
-    border:none;
-
-    border-radius:25px;
-
-    padding:25px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:25px;
-
-    text-align:left;
-
-    cursor:pointer;
-
-    color:#003A70;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.18);
-
-    transition:.25s;
-
-    min-height:150px;
-
+.scramble-card {
+    background: linear-gradient(135deg, #174d8c, #2674c8);
 }
 
-
-.game-card:hover{
-
-    transform:translateY(-6px) scale(1.02);
-
-    box-shadow:0 18px 35px rgba(0,0,0,.25);
-
+.building-card {
+    background: linear-gradient(135deg, #145c67, #15938c);
 }
 
-
-/* ========================= */
-/* GAME ICON */
-/* ========================= */
-
-.game-icon{
-
-    width:90px;
-
-    height:90px;
-
-    border-radius:22px;
-
-    background:rgba(255,255,255,.65);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:48px;
-
-    flex-shrink:0;
-
+.challenge-card {
+    background: linear-gradient(135deg, #793d8c, #b94d87);
 }
 
-
-/* ========================= */
-/* GAME TEXT */
-/* ========================= */
-
-.game-info h2{
-
-    font-size:25px;
-
-    margin-bottom:5px;
-
+.memory-card {
+    background: linear-gradient(135deg, #8a5817, #c48720);
 }
 
-
-.game-info p{
-
-    font-size:15px;
-
-    color:#555;
-
+.game-icon {
+    font-size: 65px;
+    margin-bottom: 12px;
 }
 
-
-/* ========================= */
-/* INDIVIDUAL GAME COLOURS */
-/* ========================= */
-
-.scramble{
-
-    background:#FFD166;
-
+.game-card h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
-
-.guess{
-
-    background:#06D6A0;
-
+.game-card p {
+    font-size: 18px;
+    max-width: 450px;
+    color: rgba(255,255,255,0.85);
 }
 
-
-.challenge{
-
-    background:#EF476F;
-
-    color:white;
-
+.play-label {
+    position: absolute;
+    bottom: 30px;
+    right: 35px;
+    background: rgba(255,255,255,0.18);
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-weight: bold;
 }
 
+/* =========================================================
+   GAME SCREEN
+========================================================= */
 
-.memory{
-
-    background:#9B5DE5;
-
-    color:white;
-
+.game-screen {
+    flex-direction: column;
+    padding: 25px 45px;
 }
 
-
-.challenge .game-info p,
-.memory .game-info p{
-
-    color:rgba(255,255,255,.85);
-
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
 }
 
-
-/* ========================= */
-/* FOOTER */
-/* ========================= */
-
-.footer{
-
-    text-align:center;
-
-    margin-top:25px;
-
-    font-size:16px;
-
-    opacity:.85;
-
+.game-header h1 {
+    font-size: 38px;
 }
 
+.back-button {
+    background: rgba(255,255,255,0.12);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.25);
+    padding: 13px 24px;
+    border-radius: 30px;
+    font-size: 17px;
+    cursor: pointer;
+}
 
-/* ========================= */
-/* MOBILE */
-/* ========================= */
+.game-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
 
-@media(max-width:700px){
+/* =========================================================
+   WORD SCRAMBLE
+========================================================= */
 
-    .game-page{
+#scrambleScreen {
+    background:
+        radial-gradient(circle at center, #123f70, #071525);
+}
 
-        padding:20px;
+.scramble-word {
+    font-size: 70px;
+    font-weight: 900;
+    letter-spacing: 10px;
+    margin: 25px;
+    text-align: center;
+}
 
+.scramble-info {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.scramble-input {
+    width: 500px;
+    max-width: 90%;
+    padding: 18px;
+    border-radius: 15px;
+    border: none;
+    font-size: 28px;
+    text-align: center;
+    outline: none;
+}
+
+.primary-button {
+    margin-top: 18px;
+    padding: 17px 40px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: #123f70;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.feedback {
+    height: 40px;
+    margin-top: 18px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* =========================================================
+   BUILDING GAME
+========================================================= */
+
+#buildingScreen {
+    background:
+        linear-gradient(rgba(5,30,40,0.85), rgba(5,30,40,0.95));
+}
+
+.building-image {
+    width: 620px;
+    height: 300px;
+    max-width: 85%;
+    object-fit: cover;
+    border-radius: 22px;
+    background: #183a45;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    color: #a9d5d7;
+    margin: 15px;
+}
+
+.building-question {
+    font-size: 27px;
+    margin-bottom: 15px;
+}
+
+.building-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 650px;
+    max-width: 90%;
+}
+
+.building-option {
+    padding: 17px;
+    border: none;
+    border-radius: 14px;
+    background: white;
+    color: #12404a;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.building-option:active {
+    transform: scale(0.97);
+}
+
+/* =========================================================
+   60 SECOND CHALLENGE
+========================================================= */
+
+#challengeScreen {
+    background:
+        radial-gradient(circle at center, #55286b, #1c0d2a);
+}
+
+.timer {
+    font-size: 100px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.challenge-score {
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+.challenge-question {
+    font-size: 35px;
+    text-align: center;
+    max-width: 900px;
+    margin-bottom: 25px;
+}
+
+.challenge-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 700px;
+    max-width: 90%;
+}
+
+.challenge-option {
+    padding: 18px;
+    border: none;
+    border-radius: 15px;
+    background: white;
+    color: #4b2260;
+    font-size: 21px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.start-challenge {
+    padding: 22px 55px;
+    border: none;
+    border-radius: 40px;
+    font-size: 27px;
+    font-weight: bold;
+    background: white;
+    color: #542667;
+    cursor: pointer;
+}
+
+/* =========================================================
+   MEMORY MATCH
+========================================================= */
+
+#memoryScreen {
+    background:
+        radial-gradient(circle at center, #704913, #211508);
+}
+
+.memory-info {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 110px);
+    gap: 15px;
+}
+
+.memory-card {
+    width: 110px;
+    height: 110px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    perspective: 700px;
+    background: transparent;
+}
+
+.memory-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.memory-card.flipped .memory-inner {
+    transform: rotateY(180deg);
+}
+
+.memory-front,
+.memory-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.memory-front {
+    background: #f0a928;
+    font-size: 38px;
+    color: white;
+}
+
+.memory-back {
+    background: white;
+    color: #6c4713;
+    font-size: 42px;
+    transform: rotateY(180deg);
+}
+
+/* =========================================================
+   GAME OVER
+========================================================= */
+
+.game-over {
+    text-align: center;
+}
+
+.game-over h2 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.final-score {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* =========================================================
+   MOBILE / SMALL SCREEN
+========================================================= */
+
+@media (max-width: 800px) {
+
+    #arcadeScreen {
+        padding: 20px;
     }
 
-
-    .title-section h1{
-
-        font-size:35px;
-
+    .arcade-title h1 {
+        font-size: 35px;
     }
 
-
-    .title-section p{
-
-        font-size:16px;
-
+    .game-grid {
+        gap: 12px;
     }
 
-
-    .game-grid{
-
-        grid-template-columns:1fr;
-
-        gap:12px;
-
+    .game-card {
+        padding: 20px;
+        border-radius: 18px;
     }
 
-
-    .game-card{
-
-        min-height:110px;
-
-        padding:18px;
-
+    .game-icon {
+        font-size: 40px;
     }
 
-
-    .game-icon{
-
-        width:65px;
-
-        height:65px;
-
-        font-size:35px;
-
+    .game-card h2 {
+        font-size: 21px;
     }
 
-
-    .game-info h2{
-
-        font-size:20px;
-
+    .game-card p {
+        font-size: 14px;
     }
 
+    .play-label {
+        bottom: 15px;
+        right: 15px;
+        padding: 8px 14px;
+        font-size: 13px;
+    }
 
-    .game-info p{
+    .scramble-word {
+        font-size: 45px;
+    }
 
-        font-size:13px;
+    .memory-board {
+        grid-template-columns: repeat(4, 75px);
+        gap: 8px;
+    }
 
+    .memory-card {
+        width: 75px;
+        height: 75px;
     }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<div class="game-page">
+<!-- =======================================================
+     ARCADE HOME
+======================================================= -->
 
+<section id="arcadeScreen" class="screen active">
 
-<!-- ========================= -->
-<!-- TOP BAR -->
-<!-- ========================= -->
+    <div class="arcade-header">
 
-<div class="top-bar">
+        <div class="logo-area">
+            <img src="STFXlog.png" alt="STFX Logo">
+        </div>
 
+        <div class="arcade-title">
+            <h1>MINI GAME ARCADE</h1>
+            <p>Choose your challenge!</p>
+        </div>
 
-    <div class="logo-area">
-
-        <img src="STFXlogo.png" alt="StFX Logo">
-
-        <img src="logo.png"
-             alt="Sodexo Logo"
-             class="sodexo-logo">
+        <div class="logo-area">
+            <img src="logo.png" alt="Sodexo Logo">
+        </div>
 
     </div>
 
 
-    <button class="home-button"
-            onclick="goHome()">
+    <div class="game-grid">
 
-        🏠 Home
+        <button class="game-card scramble-card"
+                onclick="openGame('scrambleScreen')">
 
-    </button>
-
-
-</div>
-
-
-
-<!-- ========================= -->
-<!-- TITLE -->
-<!-- ========================= -->
-
-<div class="title-section">
-
-    <h1>🎮 MINI GAME ZONE</h1>
-
-    <p>Pick a game and test your skills!</p>
-
-</div>
-
-
-
-<!-- ========================= -->
-<!-- GAME GRID -->
-<!-- ========================= -->
-
-<div class="game-grid">
-
-
-    <!-- WORD SCRAMBLE -->
-
-    <button class="game-card scramble"
-            onclick="startGame('scramble')">
-
-        <div class="game-icon">
-
-            🔤
-
-        </div>
-
-        <div class="game-info">
+            <div class="game-icon">🔤</div>
 
             <h2>Word Scramble</h2>
 
-            <p>Unscramble the letters before time runs out!</p>
+            <p>
+                Unscramble the letters and find the hidden word!
+            </p>
 
-        </div>
+            <div class="play-label">
+                PLAY →
+            </div>
 
-    </button>
-
-
-
-    <!-- GUESS THE PLACE -->
-
-    <button class="game-card guess"
-            onclick="startGame('guess')">
-
-        <div class="game-icon">
-
-            🏛️
-
-        </div>
-
-        <div class="game-info">
-
-            <h2>Guess the StFX Spot</h2>
-
-            <p>Can you identify the StFX building or residence?</p>
-
-        </div>
-
-    </button>
+        </button>
 
 
+        <button class="game-card building-card"
+                onclick="openBuildingGame()">
 
-    <!-- 60 SECOND CHALLENGE -->
+            <div class="game-icon">🏛️</div>
 
-    <button class="game-card challenge"
-            onclick="startGame('challenge')">
+            <h2>Guess the Building</h2>
 
-        <div class="game-icon">
+            <p>
+                Can you recognize these StFX buildings?
+            </p>
 
-            ⏱️
+            <div class="play-label">
+                PLAY →
+            </div>
 
-        </div>
+        </button>
 
-        <div class="game-info">
+
+        <button class="game-card challenge-card"
+                onclick="openChallengeGame()">
+
+            <div class="game-icon">⏱️</div>
 
             <h2>60-Second Challenge</h2>
 
-            <p>How many questions can you answer in 60 seconds?</p>
+            <p>
+                Answer as many questions as you can before time runs out!
+            </p>
 
-        </div>
+            <div class="play-label">
+                PLAY →
+            </div>
 
-    </button>
+        </button>
 
 
+        <button class="game-card memory-card"
+                onclick="openMemoryGame()">
 
-    <!-- MEMORY MATCH -->
-
-    <button class="game-card memory"
-            onclick="startGame('memory')">
-
-        <div class="game-icon">
-
-            🧠
-
-        </div>
-
-        <div class="game-info">
+            <div class="game-icon">🧠</div>
 
             <h2>Memory Match</h2>
 
-            <p>Match the cards and test your memory!</p>
+            <p>
+                Flip the cards and find all the matching pairs!
+            </p>
+
+            <div class="play-label">
+                PLAY →
+            </div>
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     WORD SCRAMBLE
+======================================================= -->
+
+<section id="scrambleScreen"
+         class="screen game-screen">
+
+    <div class="game-header">
+
+        <h1>🔤 Word Scramble</h1>
+
+        <button class="back-button"
+                onclick="goHome()">
+            ← Arcade
+        </button>
+
+    </div>
+
+
+    <div class="game-content">
+
+        <div class="scramble-info">
+            Unscramble this word:
+        </div>
+
+        <div id="scrambledWord"
+             class="scramble-word">
+        </div>
+
+        <input
+            id="scrambleInput"
+            class="scramble-input"
+            type="text"
+            placeholder="Type your answer"
+            autocomplete="off">
+
+        <button class="primary-button"
+                onclick="checkScramble()">
+            CHECK ANSWER
+        </button>
+
+        <div id="scrambleFeedback"
+             class="feedback">
+        </div>
+
+        <button class="primary-button"
+                onclick="newScramble()">
+            NEXT WORD
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     GUESS THE BUILDING
+======================================================= -->
+
+<section id="buildingScreen"
+         class="screen game-screen">
+
+    <div class="game-header">
+
+        <h1>🏛️ Guess the Building</h1>
+
+        <button class="back-button"
+                onclick="goHome()">
+            ← Arcade
+        </button>
+
+    </div>
+
+
+    <div class="game-content">
+
+        <div class="building-question">
+            Which StFX building is this?
+        </div>
+
+        <div id="buildingImage"
+             class="building-image">
+            Building Photo
+        </div>
+
+        <div id="buildingOptions"
+             class="building-options">
+        </div>
+
+        <div id="buildingFeedback"
+             class="feedback">
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     60 SECOND CHALLENGE
+======================================================= -->
+
+<section id="challengeScreen"
+         class="screen game-screen">
+
+    <div class="game-header">
+
+        <h1>⏱️ 60-Second Challenge</h1>
+
+        <button class="back-button"
+                onclick="goHome()">
+            ← Arcade
+        </button>
+
+    </div>
+
+
+    <div class="game-content">
+
+        <div id="challengeStart">
+
+            <h2 style="font-size:40px; margin-bottom:20px;">
+                Ready?
+            </h2>
+
+            <p style="font-size:22px; margin-bottom:30px;">
+                Answer as many questions as possible in 60 seconds!
+            </p>
+
+            <button class="start-challenge"
+                    onclick="startChallenge()">
+                START!
+            </button>
 
         </div>
 
-    </button>
+
+        <div id="challengeGame"
+             style="display:none; width:100%;">
+
+            <div class="timer"
+                 id="timer">
+                60
+            </div>
+
+            <div class="challenge-score">
+                Score: <span id="challengeScore">0</span>
+            </div>
+
+            <div id="challengeQuestion"
+                 class="challenge-question">
+            </div>
+
+            <div id="challengeOptions"
+                 class="challenge-options">
+            </div>
+
+        </div>
 
 
-</div>
+        <div id="challengeOver"
+             class="game-over"
+             style="display:none;">
+
+            <h2>TIME'S UP!</h2>
+
+            <div class="final-score">
+                Your Score:
+                <span id="finalChallengeScore">
+                    0
+                </span>
+            </div>
+
+            <button class="start-challenge"
+                    onclick="startChallenge()">
+                PLAY AGAIN
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 
-<!-- ========================= -->
-<!-- FOOTER -->
-<!-- ========================= -->
+<!-- =======================================================
+     MEMORY MATCH
+======================================================= -->
 
-<div class="footer">
+<section id="memoryScreen"
+         class="screen game-screen">
 
-    Tap a game to start playing!
+    <div class="game-header">
 
-</div>
+        <h1>🧠 Memory Match</h1>
+
+        <button class="back-button"
+                onclick="goHome()">
+            ← Arcade
+        </button>
+
+    </div>
 
 
-</div>
+    <div class="game-content">
+
+        <div class="memory-info">
+            Matches:
+            <span id="matches">
+                0
+            </span>
+            / 8
+        </div>
+
+        <div id="memoryBoard"
+             class="memory-board">
+        </div>
+
+        <div id="memoryFeedback"
+             class="feedback">
+        </div>
+
+        <button class="primary-button"
+                onclick="openMemoryGame()">
+            NEW GAME
+        </button>
+
+    </div>
+
+</section>
 
 
 
 <script>
 
+/* =========================================================
+   GENERAL NAVIGATION
+========================================================= */
 
-/* ========================= */
-/* START GAME */
-/* ========================= */
+let inactivityTimer;
 
-function startGame(game){
+function resetInactivityTimer() {
 
-    if(game === "scramble"){
+    clearTimeout(inactivityTimer);
 
-        alert("Word Scramble coming soon!");
+    inactivityTimer = setTimeout(() => {
+
+        goHome();
+
+    }, 20000);
+
+}
+
+function openGame(id) {
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document.getElementById(id)
+        .classList.add("active");
+
+    resetInactivityTimer();
+
+}
+
+function goHome() {
+
+    document.querySelectorAll(".screen")
+        .forEach(screen => {
+            screen.classList.remove("active");
+        });
+
+    document.getElementById("arcadeScreen")
+        .classList.add("active");
+
+    clearInterval(challengeInterval);
+
+    resetInactivityTimer();
+
+}
+
+document.addEventListener(
+    "click",
+    resetInactivityTimer
+);
+
+document.addEventListener(
+    "touchstart",
+    resetInactivityTimer
+);
+
+document.addEventListener(
+    "mousemove",
+    resetInactivityTimer
+);
+
+
+/* =========================================================
+   WORD SCRAMBLE
+========================================================= */
+
+const scrambleWords = [
+
+    "STFX",
+    "CAMPUS",
+    "MORRISON",
+    "MEALHALL",
+    "ANTIGONISH",
+    "STUDENT",
+    "UNIVERSITY",
+    "TRADITION",
+    "XAVERIAN",
+    "SCHOLAR",
+    "COMMUNITY",
+    "DINING"
+
+];
+
+let currentScramble = "";
+
+function shuffleWord(word) {
+
+    let letters = word.split("");
+
+    for (
+        let i = letters.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        let j = Math.floor(
+            Math.random() * (i + 1)
+        );
+
+        [
+            letters[i],
+            letters[j]
+        ] = [
+            letters[j],
+            letters[i]
+        ];
 
     }
 
+    return letters.join("");
 
-    if(game === "guess"){
+}
 
-        alert("Guess the StFX Spot coming soon!");
+function newScramble() {
+
+    currentScramble =
+        scrambleWords[
+            Math.floor(
+                Math.random() *
+                scrambleWords.length
+            )
+        ];
+
+    let scrambled =
+        shuffleWord(currentScramble);
+
+    document.getElementById(
+        "scrambledWord"
+    ).textContent = scrambled;
+
+    document.getElementById(
+        "scrambleInput"
+    ).value = "";
+
+    document.getElementById(
+        "scrambleFeedback"
+    ).textContent = "";
+
+}
+
+function checkScramble() {
+
+    let answer =
+        document.getElementById(
+            "scrambleInput"
+        ).value
+        .trim()
+        .toUpperCase();
+
+    let feedback =
+        document.getElementById(
+            "scrambleFeedback"
+        );
+
+    if (answer === currentScramble) {
+
+        feedback.textContent =
+            "✓ Correct! Great job!";
+
+        feedback.style.color =
+            "#76e6a2";
+
+    } else {
+
+        feedback.textContent =
+            "✗ Not quite. Try again!";
+
+        feedback.style.color =
+            "#ff9b9b";
 
     }
 
+}
 
-    if(game === "challenge"){
+newScramble();
 
-        alert("60-Second Challenge coming soon!");
+
+
+/* =========================================================
+   GUESS THE BUILDING
+========================================================= */
+
+/*
+   Replace the image paths below with your actual
+   STFX building photos.
+
+   Example:
+
+   image: "images/morrison.jpg"
+
+*/
+
+const buildings = [
+
+    {
+        name: "Morrison Hall",
+        image: "images/morrison.jpg"
+    },
+
+    {
+        name: "Bloomfield Centre",
+        image: "images/bloomfield.jpg"
+    },
+
+    {
+        name: "Keating Centre",
+        image: "images/keating.jpg"
+    },
+
+    {
+        name: "McKenna Centre",
+        image: "images/mckenna.jpg"
+    }
+
+];
+
+let currentBuilding;
+
+function openBuildingGame() {
+
+    openGame("buildingScreen");
+
+    loadBuilding();
+
+}
+
+function loadBuilding() {
+
+    currentBuilding =
+        buildings[
+            Math.floor(
+                Math.random() *
+                buildings.length
+            )
+        ];
+
+    let image =
+        document.getElementById(
+            "buildingImage"
+        );
+
+    image.innerHTML =
+        `<img src="${currentBuilding.image}"
+               style="
+               width:100%;
+               height:100%;
+               object-fit:cover;
+               border-radius:22px;"
+               onerror="
+               this.style.display='none';
+               this.parentElement.innerHTML='Building Photo';
+               ">`;
+
+    let options =
+        [...buildings]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4);
+
+    if (
+        !options.some(
+            building =>
+            building.name ===
+            currentBuilding.name
+        )
+    ) {
+
+        options[0] =
+            currentBuilding;
 
     }
 
+    options =
+        options.sort(
+            () => Math.random() - 0.5
+        );
 
-    if(game === "memory"){
+    let container =
+        document.getElementById(
+            "buildingOptions"
+        );
 
-        alert("Memory Match coming soon!");
+    container.innerHTML = "";
+
+    options.forEach(
+        building => {
+
+            let button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "building-option";
+
+            button.textContent =
+                building.name;
+
+            button.onclick =
+                () => checkBuilding(
+                    building.name
+                );
+
+            container.appendChild(
+                button
+            );
+
+        }
+    );
+
+    document.getElementById(
+        "buildingFeedback"
+    ).textContent = "";
+
+}
+
+function checkBuilding(answer) {
+
+    let feedback =
+        document.getElementById(
+            "buildingFeedback"
+        );
+
+    if (
+        answer ===
+        currentBuilding.name
+    ) {
+
+        feedback.textContent =
+            "✓ Correct!";
+
+        feedback.style.color =
+            "#76e6a2";
+
+        setTimeout(
+            loadBuilding,
+            1200
+        );
+
+    } else {
+
+        feedback.textContent =
+            "✗ Try again!";
+
+        feedback.style.color =
+            "#ff9b9b";
 
     }
 
 }
 
 
-/* ========================= */
-/* HOME BUTTON */
-/* ========================= */
 
-function goHome(){
+/* =========================================================
+   60 SECOND CHALLENGE
+========================================================= */
 
-    window.location.href = "index.html";
+const challengeQuestions = [
+
+    {
+        question:
+            "What does STFX stand for?",
+
+        options: [
+            "St. Francis Xavier University",
+            "St. Thomas Francis Xavier",
+            "Saint Xavier Technical Facility",
+            "St. Francis Technology Exchange"
+        ],
+
+        answer:
+            "St. Francis Xavier University"
+    },
+
+    {
+        question:
+            "Which town is StFX located in?",
+
+        options: [
+            "Antigonish",
+            "Halifax",
+            "Sydney",
+            "Truro"
+        ],
+
+        answer:
+            "Antigonish"
+    },
+
+    {
+        question:
+            "How many minutes are in one hour?",
+
+        options: [
+            "30",
+            "45",
+            "60",
+            "90"
+        ],
+
+        answer:
+            "60"
+    },
+
+    {
+        question:
+            "Which planet is known as the Red Planet?",
+
+        options: [
+            "Earth",
+            "Mars",
+            "Jupiter",
+            "Venus"
+        ],
+
+        answer:
+            "Mars"
+    },
+
+    {
+        question:
+            "What is 5 × 5?",
+
+        options: [
+            "15",
+            "20",
+            "25",
+            "30"
+        ],
+
+        answer:
+            "25"
+    },
+
+    {
+        question:
+            "Which ocean is the largest?",
+
+        options: [
+            "Atlantic Ocean",
+            "Indian Ocean",
+            "Arctic Ocean",
+            "Pacific Ocean"
+        ],
+
+        answer:
+            "Pacific Ocean"
+    },
+
+    {
+        question:
+            "What color do you get by mixing blue and yellow?",
+
+        options: [
+            "Purple",
+            "Green",
+            "Orange",
+            "Red"
+        ],
+
+        answer:
+            "Green"
+    },
+
+    {
+        question:
+            "How many days are in a week?",
+
+        options: [
+            "5",
+            "6",
+            "7",
+            "8"
+        ],
+
+        answer:
+            "7"
+    }
+
+];
+
+let challengeScore = 0;
+let challengeTime = 60;
+let challengeInterval;
+let currentQuestion;
+
+function openChallengeGame() {
+
+    openGame("challengeScreen");
+
+    document.getElementById(
+        "challengeStart"
+    ).style.display = "block";
+
+    document.getElementById(
+        "challengeGame"
+    ).style.display = "none";
+
+    document.getElementById(
+        "challengeOver"
+    ).style.display = "none";
 
 }
 
+function startChallenge() {
+
+    challengeScore = 0;
+
+    challengeTime = 60;
+
+    document.getElementById(
+        "challengeScore"
+    ).textContent = 0;
+
+    document.getElementById(
+        "timer"
+    ).textContent = 60;
+
+    document.getElementById(
+        "challengeStart"
+    ).style.display = "none";
+
+    document.getElementById(
+        "challengeOver"
+    ).style.display = "none";
+
+    document.getElementById(
+        "challengeGame"
+    ).style.display = "block";
+
+    loadChallengeQuestion();
+
+    clearInterval(
+        challengeInterval
+    );
+
+    challengeInterval =
+        setInterval(
+            () => {
+
+                challengeTime--;
+
+                document.getElementById(
+                    "timer"
+                ).textContent =
+                    challengeTime;
+
+                if (
+                    challengeTime <= 0
+                ) {
+
+                    endChallenge();
+
+                }
+
+            },
+            1000
+        );
+
+}
+
+function loadChallengeQuestion() {
+
+    currentQuestion =
+        challengeQuestions[
+            Math.floor(
+                Math.random() *
+                challengeQuestions.length
+            )
+        ];
+
+    document.getElementById(
+        "challengeQuestion"
+    ).textContent =
+        currentQuestion.question;
+
+    let container =
+        document.getElementById(
+            "challengeOptions"
+        );
+
+    container.innerHTML = "";
+
+    currentQuestion.options
+        .sort(
+            () => Math.random() - 0.5
+        )
+        .forEach(
+            option => {
+
+                let button =
+                    document.createElement(
+                        "button"
+                    );
+
+                button.className =
+                    "challenge-option";
+
+                button.textContent =
+                    option;
+
+                button.onclick =
+                    () => answerChallenge(
+                        option
+                    );
+
+                container.appendChild(
+                    button
+                );
+
+            }
+        );
+
+}
+
+function answerChallenge(answer) {
+
+    if (
+        answer ===
+        currentQuestion.answer
+    ) {
+
+        challengeScore++;
+
+        document.getElementById(
+            "challengeScore"
+        ).textContent =
+            challengeScore;
+
+    }
+
+    loadChallengeQuestion();
+
+}
+
+function endChallenge() {
+
+    clearInterval(
+        challengeInterval
+    );
+
+    document.getElementById(
+        "challengeGame"
+    ).style.display = "none";
+
+    document.getElementById(
+        "challengeOver"
+    ).style.display = "block";
+
+    document.getElementById(
+        "finalChallengeScore"
+    ).textContent =
+        challengeScore;
+
+}
+
+
+
+/* =========================================================
+   MEMORY MATCH
+========================================================= */
+
+const memorySymbols = [
+
+    "🏛️",
+    "⭐",
+    "📚",
+    "🎓",
+    "🍎",
+    "🏐",
+    "☕",
+    "🌊"
+
+];
+
+let memoryCards = [];
+
+let firstCard = null;
+
+let secondCard = null;
+
+let lockBoard = false;
+
+let memoryMatches = 0;
+
+
+function openMemoryGame() {
+
+    openGame("memoryScreen");
+
+    createMemoryBoard();
+
+}
+
+
+function createMemoryBoard() {
+
+    memoryMatches = 0;
+
+    firstCard = null;
+
+    secondCard = null;
+
+    lockBoard = false;
+
+    document.getElementById(
+        "matches"
+    ).textContent = 0;
+
+    let cards =
+        [
+            ...memorySymbols,
+            ...memorySymbols
+        ];
+
+    cards =
+        cards.sort(
+            () => Math.random() - 0.5
+        );
+
+    let board =
+        document.getElementById(
+            "memoryBoard"
+        );
+
+    board.innerHTML = "";
+
+    cards.forEach(
+        symbol => {
+
+            let card =
+                document.createElement(
+                    "button"
+                );
+
+            card.className =
+                "memory-card";
+
+            card.innerHTML = `
+
+                <div class="memory-inner">
+
+                    <div class="memory-front">
+                        ?
+                    </div>
+
+                    <div class="memory-back">
+                        ${symbol}
+                    </div>
+
+                </div>
+
+            `;
+
+            card.onclick =
+                () => flipCard(
+                    card,
+                    symbol
+                );
+
+            board.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+function flipCard(card, symbol) {
+
+    if (
+        lockBoard ||
+        card === firstCard ||
+        card.classList.contains(
+            "matched"
+        )
+    ) {
+
+        return;
+
+    }
+
+    card.classList.add(
+        "flipped"
+    );
+
+    if (!firstCard) {
+
+        firstCard = card;
+
+        card.dataset.symbol =
+            symbol;
+
+        return;
+
+    }
+
+    secondCard = card;
+
+    card.dataset.symbol =
+        symbol;
+
+    checkMemoryMatch();
+
+}
+
+
+function checkMemoryMatch() {
+
+    if (
+        firstCard.dataset.symbol ===
+        secondCard.dataset.symbol
+    ) {
+
+        firstCard.classList.add(
+            "matched"
+        );
+
+        secondCard.classList.add(
+            "matched"
+        );
+
+        memoryMatches++;
+
+        document.getElementById(
+            "matches"
+        ).textContent =
+            memoryMatches;
+
+        resetMemoryTurn();
+
+        if (
+            memoryMatches === 8
+        ) {
+
+            document.getElementById(
+                "memoryFeedback"
+            ).textContent =
+                "🎉 You found them all!";
+
+        }
+
+    } else {
+
+        lockBoard = true;
+
+        setTimeout(
+            () => {
+
+                firstCard.classList.remove(
+                    "flipped"
+                );
+
+                secondCard.classList.remove(
+                    "flipped"
+                );
+
+                resetMemoryTurn();
+
+            },
+            900
+        );
+
+    }
+
+}
+
+
+function resetMemoryTurn() {
+
+    firstCard = null;
+
+    secondCard = null;
+
+    lockBoard = false;
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+resetInactivityTimer();
 
 </script>
 
-
 </body>
-
 </html>
+```
