@@ -184,17 +184,17 @@ body {
    GAME GRID
 ========================================================= */
 
-.game-grid {
-    display: grid;
+.game-grid{
+    display:grid;
 
-    grid-template-columns: 600px 600px;
-    grid-template-rows: 230px 230px;
+    grid-template-columns:700px 700px;
+    grid-template-rows:280px 280px;
 
-    gap: 30px;
+    gap:35px;
 
-    width: 1230px;
+    width:1435px;
 
-    margin: 0 auto;
+    margin:0 auto;
 }
 
 
@@ -202,29 +202,29 @@ body {
    GAME CARDS / TABS
 ========================================================= */
 
-.game-card {
-    width: 600px;
-    height: 230px;
+.game-card{
+    width:700px;
+    height:280px;
 
-    border: none;
-    border-radius: 30px;
+    border:none;
+    border-radius:30px;
 
-    color: white;
+    color:white;
 
-    cursor: pointer;
+    cursor:pointer;
 
-    position: relative;
-    overflow: hidden;
+    position:relative;
+    overflow:hidden;
 
-    text-align: left;
+    text-align:left;
 
-    padding: 32px;
+    padding:40px;
 
     box-shadow:
         0 12px 30px rgba(0,0,0,0.35);
 
     transition:
-        transform 0.15s ease;
+        transform .15s ease;
 }
 
 .game-card:active {
@@ -236,20 +236,21 @@ body {
    GAME CARD CONTENT
 ========================================================= */
 
-.game-icon {
-    font-size: 50px;
-    margin-bottom: 8px;
+.game-icon{
+    font-size:65px;
+    margin-bottom:12px;
 }
 
-.game-card h2 {
-    font-size: 32px;
-    margin-bottom: 10px;
+.game-card h2{
+    font-size:40px;
+    margin-bottom:12px;
 }
 
-.game-card p {
-    font-size: 19px;
-    max-width: 470px;
-    color: rgba(255,255,255,0.85);
+.game-card p{
+    font-size:24px;
+    max-width:560px;
+    line-height:1.35;
+    color:rgba(255,255,255,.88);
 }
 
 .play-label {
@@ -279,16 +280,15 @@ body {
 
     position: absolute;
 
-    width: 230px;
-    height: 230px;
+    width: 320px;
+    height: 320px;
 
     border-radius: 50%;
 
-    right: -60px;
-    bottom: -80px;
+    right: -90px;
+    bottom: -100px;
 
-    background:
-        rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.08);
 
     pointer-events: none;
 }
@@ -824,10 +824,16 @@ body {
             25px;
     }
 
-    .arcade-header {
-        height: 170px;
-    }
+.arcade-header {
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
+    width:100%;
+    height:180px;
+
+    flex-shrink:0;
+}
     .arcade-title h1 {
         font-size: 45px;
     }
@@ -874,17 +880,14 @@ body {
         font-size: 14px;
     }
 
-    .play-label {
-        bottom: 15px;
+    .play-label{
+    bottom:30px;
+    right:35px;
 
-        right: 15px;
+    padding:14px 28px;
 
-        padding:
-            8px
-            14px;
-
-        font-size: 13px;
-    }
+    font-size:22px;
+}
 
 
     /* OTHER GAMES */
@@ -928,9 +931,10 @@ body {
        above the game tabs.
     */
 
-    .arcade-header {
-        height: 280px;
-    }
+   .arcade-header {
+    height: 180px;
+}
+
 
     .arcade-title h1 {
         font-size: 90px;
@@ -940,35 +944,21 @@ body {
         font-size: 28px;
     }
 
-    /*
-       Bigger game tabs.
-       The 2 x 2 grid is centered.
-    */
+   
 
     .game-grid {
-        grid-template-columns:
-            600px
-            600px;
+    grid-template-columns: 700px 700px;
+    grid-template-rows: 280px 280px;
+    gap: 35px;
+    width: 1435px;
+    margin: 0 auto;
+}
 
-        grid-template-rows:
-            230px
-            230px;
-
-        gap: 30px;
-
-        width: 1230px;
-
-        margin:
-            0
-            auto;
-    }
-
-    .game-card {
-        width: 600px;
-        height: 230px;
-
-        padding: 32px;
-    }
+   .game-card {
+    width: 700px;
+    height: 280px;
+    padding: 40px;
+}
 
 }
 
