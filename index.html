@@ -153,30 +153,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 100%;
-
-    
-    height: 90px;
-
+    height: 65px;
     flex-shrink: 0;
-}
-
-.arcade-title {
-    text-align: center;
-    width: 100%;
+    margin-bottom: 20px;
 }
 
 .arcade-title h1 {
     font-size: 50px;
     letter-spacing: 5px;
-    font-weight:bold;
+    font-weight: bold;
     margin: 0;
 }
 
+
 .arcade-title p {
-    margin-top: 18px;
-    font-size: 28px;
+    margin-top: 8px;
+    font-size: 22px;
     color: #b9d7ed;
 }
 
@@ -188,7 +181,7 @@ body {
 .game-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 220px);
+    grid-template-rows: repeat(4, 210px);
     gap: 24px;
     width: 98%;
 }
@@ -199,31 +192,23 @@ body {
    GAME CARDS / TABS
 ========================================================= */
 
-.game-card{
-
-    width:100%;
-
-    height:100%;
-
-    border:none;
-
+.game-card {
+    width: 100%;
+    height: 100%;
+    border: none;
     padding: 38px;
-      
     border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-align: left;
 
-    color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    cursor:pointer;
-
-    position:relative;
-
-    overflow:hidden;
-
-    text-align:left;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.35);
-
+    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
 }
 
 .game-card:active {
@@ -251,22 +236,7 @@ body {
 }
 
 
-.play-label {
-    position: absolute;
 
-    bottom: 25px;
-    right: 28px;
-
-    background:
-        rgba(255,255,255,0.18);
-
-     padding: 12px 24px;
-
-    border-radius: 30px;
-
-font-size: 20px;
-    font-weight: bold;
-}
 
 
 /* =========================================================
@@ -876,9 +846,7 @@ font-size: 20px;
                 Unscramble the letters and find the hidden word!
             </p>
 
-            <div class="play-label">
-                PLAY →
-            </div>
+           
 
         </button>
 
@@ -901,9 +869,7 @@ font-size: 20px;
                 Can you recognize these StFX buildings?
             </p>
 
-            <div class="play-label">
-                PLAY →
-            </div>
+           
 
         </button>
 
@@ -926,9 +892,7 @@ font-size: 20px;
                 Answer as many questions as you can before time runs out!
             </p>
 
-            <div class="play-label">
-                PLAY →
-            </div>
+            
 
         </button>
 
@@ -951,9 +915,7 @@ font-size: 20px;
                 Flip the cards and find all the matching pairs!
             </p>
 
-            <div class="play-label">
-                PLAY →
-            </div>
+           
 
         </button>
 
