@@ -3051,6 +3051,8 @@ let currentQuestion;
 
 let remainingChallengeQuestions = [];
 
+let challengeActive = false;
+
 
 /* =========================================================
    HIGH SCORE
@@ -3117,13 +3119,14 @@ function openChallengeGame() {
 
 function startChallenge() {
 
-    challengeScore =
-        0;
+   challengeScore =
+    0;
 
-    challengeTime =
-        60;
+challengeTime =
+    60;
 
-
+challengeActive =
+    true;
     /*
        Create a fresh shuffled
        question list.
@@ -3132,10 +3135,7 @@ function startChallenge() {
     shuffleChallengeQuestions();
 
 
-    document.getElementById(
-        "challengeScore"
-    ).textContent =
-        "0";
+  
 
 
     document.getElementById(
@@ -3303,10 +3303,11 @@ function answerChallenge(answer) {
 
     /*
        Don't allow an answer after
-       the timer has reached zero.
+       the game has ended.
     */
 
     if (
+        !challengeActive ||
         challengeTime <= 0
     ) {
 
@@ -3327,12 +3328,6 @@ function answerChallenge(answer) {
 
         challengeScore++;
 
-
-        document.getElementById(
-            "challengeScore"
-        ).textContent =
-            challengeScore;
-
     }
 
 
@@ -3345,17 +3340,18 @@ function answerChallenge(answer) {
 
 }
 
-
 /* =========================================================
    END CHALLENGE
 ========================================================= */
 
 function endChallenge() {
 
+    challengeActive =
+        false;
+
     clearInterval(
         challengeInterval
     );
-
 
     /*
        Make sure the timer
