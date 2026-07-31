@@ -1073,7 +1073,6 @@ body {
 </section>
 
 
-
 <!-- =======================================================
      60 SECOND CHALLENGE
 ======================================================= -->
@@ -1862,38 +1861,53 @@ newScramble();
 const buildings = [
 
     {
-        name:
-            "Morrison Hall",
-
-        image:
-            "images/morrison.jpg"
+        name: "Morrison Hall",
+        image: "morrison.jpg"
     },
 
-
     {
-        name:
-            "Bloomfield Centre",
-
-        image:
-            "images/bloomfield.jpg"
+        name: "Bloomfield Centre",
+        image: "bloomfield.jpg"
     },
 
-
     {
-        name:
-            "Keating Centre",
-
-        image:
-            "images/keating.jpg"
+        name: "Mulroney Hall",
+        image: "Mulroney.jpg"
     },
 
+    {
+        name: "Angus L. Macdonald Library",
+        image: "Library.jpg"
+    },
 
     {
-        name:
-            "McKenna Centre",
+        name: "Schwartz School of Business",
+        image: "Schwartz.jpg"
+    },
 
-        image:
-            "images/mckenna.jpg"
+    {
+        name: "Nasso Family Science Centre",
+        image: "Nasso.jpg"
+    },
+
+    {
+        name: "Amelia Saputo Centre ",
+        image: "Amelia_Saputo.jpg"
+    },
+
+    {
+        name: "Charles V. Keating Centre",
+        image: "Keating_Center.jpg"
+    },
+
+    {
+        name: "Bauer Theatre",
+        image: "Bauer_Theatre.jpg"
+    },
+
+    {
+        name: "MacKinnon Hall",
+        image: "Mackinnon_Hall.jpg"
     }
 
 ];
@@ -1901,6 +1915,18 @@ const buildings = [
 
 let currentBuilding;
 
+let buildingGameBuildings = [];
+
+let buildingQuestion = 0;
+
+let buildingScore = 0;
+
+let buildingLocked = false;
+
+
+/* =========================================================
+   OPEN BUILDING GAME
+========================================================= */
 
 function openBuildingGame() {
 
@@ -1908,21 +1934,74 @@ function openBuildingGame() {
         "buildingScreen"
     );
 
+
+    /*
+       Randomly select 5 buildings
+       from the 10 available.
+    */
+
+    buildingGameBuildings =
+        [...buildings]
+        .sort(
+            () =>
+                Math.random() - 0.5
+        )
+        .slice(
+            0,
+            5
+        );
+
+
+    buildingQuestion = 0;
+
+    buildingScore = 0;
+
+    buildingLocked = false;
+
+
     loadBuilding();
 
 }
 
 
+/* =========================================================
+   LOAD BUILDING
+========================================================= */
+
 function loadBuilding() {
 
+    buildingLocked = false;
+
+
+    /*
+       If all 5 buildings are finished,
+       show the final score.
+    */
+
+    if (
+        buildingQuestion >= 5
+    ) {
+
+        showBuildingFinalScore();
+
+        return;
+
+    }
+
+
+    /*
+       Select the next building.
+    */
+
     currentBuilding =
-        buildings[
-            Math.floor(
-                Math.random() *
-                buildings.length
-            )
+        buildingGameBuildings[
+            buildingQuestion
         ];
 
+
+    /*
+       Display the building image.
+    */
 
     let image =
         document.getElementById(
@@ -1953,40 +2032,55 @@ function loadBuilding() {
     `;
 
 
-    let options =
-        [...buildings]
+    /*
+       Start with the correct answer.
+    */
+
+    let options = [
+        currentBuilding
+    ];
+
+
+    /*
+       Add 3 incorrect answers.
+    */
+
+    let incorrectBuildings =
+        buildings
+        .filter(
+            building =>
+                building.name !==
+                currentBuilding.name
+        )
         .sort(
             () =>
-                Math.random() -
-                0.5
+                Math.random() - 0.5
         )
         .slice(
             0,
-            4
+            3
         );
 
 
-    if (
-        !options.some(
-            building =>
-                building.name ===
-                currentBuilding.name
-        )
-    ) {
+    options.push(
+        ...incorrectBuildings
+    );
 
-        options[0] =
-            currentBuilding;
 
-    }
-
+    /*
+       Randomize the four answer choices.
+    */
 
     options =
         options.sort(
             () =>
-                Math.random() -
-                0.5
+                Math.random() - 0.5
         );
 
+
+    /*
+       Display answer buttons.
+    */
 
     let container =
         document.getElementById(
@@ -2030,15 +2124,34 @@ function loadBuilding() {
     );
 
 
+    /*
+       Clear previous feedback.
+    */
+
     document.getElementById(
         "buildingFeedback"
-    ).textContent =
-        "";
+    ).textContent = "";
 
 }
 
 
+/* =========================================================
+   CHECK BUILDING
+========================================================= */
+
 function checkBuilding(answer) {
+
+    /*
+       Prevent multiple clicks
+       after a correct answer.
+    */
+
+    if (buildingLocked) {
+
+        return;
+
+    }
+
 
     let feedback =
         document.getElementById(
@@ -2046,10 +2159,20 @@ function checkBuilding(answer) {
         );
 
 
+    /*
+       CORRECT
+    */
+
     if (
         answer ===
         currentBuilding.name
     ) {
+
+        buildingLocked = true;
+
+
+        buildingScore++;
+
 
         feedback.textContent =
             "✓ Correct!";
@@ -2059,12 +2182,43 @@ function checkBuilding(answer) {
             "#76e6a2";
 
 
+        buildingQuestion++;
+
+
+        /*
+           If this was the 5th building,
+           show the final score.
+        */
+
+        if (
+            buildingQuestion >= 5
+        ) {
+
+            setTimeout(
+                showBuildingFinalScore,
+                1200
+            );
+
+            return;
+
+        }
+
+
+        /*
+           Move to the next building.
+        */
+
         setTimeout(
             loadBuilding,
             1200
         );
 
     }
+
+
+    /*
+       INCORRECT
+    */
 
     else {
 
@@ -2080,6 +2234,221 @@ function checkBuilding(answer) {
 }
 
 
+/* =========================================================
+   FINAL SCORE SCREEN
+========================================================= */
+
+function showBuildingFinalScore() {
+
+    document.querySelector(
+        "#buildingScreen .game-content"
+    ).innerHTML = `
+
+        <div class="game-over">
+
+            <div class="game-over-icon">
+                🎉
+            </div>
+
+            <h2>
+                Game Complete!
+            </h2>
+
+            <div class="final-score-label">
+                Your Score
+            </div>
+
+            <div class="final-score">
+                ${buildingScore} / 5
+            </div>
+
+            <button
+                class="primary-button"
+                onclick="restartBuildingGame()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RESTART BUILDING GAME
+========================================================= */
+
+function restartBuildingGame() {
+
+    buildingGameBuildings = [];
+
+    currentBuilding = null;
+
+    buildingQuestion = 0;
+
+    buildingScore = 0;
+
+    buildingLocked = false;
+
+
+    /*
+       Rebuild the building screen.
+    */
+
+    document.querySelector(
+        "#buildingScreen .game-content"
+    ).innerHTML = `
+
+        <div class="building-question">
+
+            Which StFX building is this?
+
+        </div>
+
+
+        <div
+            id="buildingImage"
+            class="building-image">
+
+            Building Photo
+
+        </div>
+
+
+        <div
+            id="buildingOptions"
+            class="building-options">
+        </div>
+
+
+        <div
+            id="buildingFeedback"
+            class="feedback">
+        </div>
+
+    `;
+
+
+    /*
+       Start a new game.
+    */
+
+    openBuildingGame();
+
+}
+
+/* =========================================================
+   FINAL SCORE SCREEN
+========================================================= */
+
+function showBuildingFinalScore() {
+
+    document.querySelector(
+        "#buildingScreen .game-content"
+    ).innerHTML = `
+
+        <div class="game-over">
+
+            <div class="game-over-icon">
+                🎉
+            </div>
+
+            <h2>
+                Game Complete!
+            </h2>
+
+            <div class="final-score-label">
+                Your Score
+            </div>
+
+            <div class="final-score">
+                ${buildingScore} / 5
+            </div>
+
+            <button
+                class="primary-button"
+                onclick="restartBuildingGame()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RESTART BUILDING GAME
+========================================================= */
+
+function restartBuildingGame() {
+
+    /*
+       Reset score and questions.
+    */
+
+    buildingGameBuildings = [];
+
+    currentBuilding = null;
+
+    buildingQuestion = 0;
+
+    buildingScore = 0;
+
+    buildingLocked = false;
+
+
+    /*
+       Rebuild the original screen.
+    */
+
+    document.querySelector(
+        "#buildingScreen .game-content"
+    ).innerHTML = `
+
+        <div class="building-question">
+
+            Which StFX building is this?
+
+        </div>
+
+
+        <div
+            id="buildingImage"
+            class="building-image">
+
+            Building Photo
+
+        </div>
+
+
+        <div
+            id="buildingOptions"
+            class="building-options">
+        </div>
+
+
+        <div
+            id="buildingFeedback"
+            class="feedback">
+        </div>
+
+    `;
+
+
+    /*
+       Start a new game.
+    */
+
+    openBuildingGame();
+
+}
 
 /* =========================================================
    60 SECOND CHALLENGE
