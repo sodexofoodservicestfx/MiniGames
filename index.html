@@ -952,13 +952,25 @@ body {
     <div class="game-content">
 
 
-        <div class="scramble-info">
-            Unscramble this word:
+        <div
+            id="scrambleProgress"
+            class="scramble-info">
+
+            Word 1 of 5
+
         </div>
 
 
-        <div id="scrambledWord"
-             class="scramble-word">
+        <div class="scramble-info">
+
+            Unscramble this word:
+
+        </div>
+
+
+        <div
+            id="scrambledWord"
+            class="scramble-word">
         </div>
 
 
@@ -970,25 +982,10 @@ body {
             autocomplete="off">
 
 
-        <button class="primary-button"
-                onclick="checkScramble()">
-
-            CHECK ANSWER
-
-        </button>
-
-
-        <div id="scrambleFeedback"
-             class="feedback">
+        <div
+            id="scrambleFeedback"
+            class="feedback">
         </div>
-
-
-        <button class="primary-button"
-                onclick="newScramble()">
-
-            NEXT WORD
-
-        </button>
 
 
     </div>
@@ -1455,6 +1452,7 @@ let remainingWords = [];
 let currentScramble = "";
 let scrambleScore = 0;
 let scrambleQuestion = 0;
+let scrambleLocked = false;
 
 
 /* =========================================================
@@ -1494,9 +1492,12 @@ function shuffleWord(word) {
 
 function newScramble() {
 
+    scrambleLocked = false;
+
+
     /*
-       Start a new set of 5 words
-       if there are no words remaining.
+       Create a new set of 5 words
+       when starting/restarting.
     */
 
     if (remainingWords.length === 0) {
@@ -1513,8 +1514,7 @@ function newScramble() {
 
 
     /*
-       If all 5 questions are finished,
-       show the final score.
+       Show final score after 5 words.
     */
 
     if (scrambleQuestion >= 5) {
@@ -1561,12 +1561,17 @@ function newScramble() {
 
 
     /*
-       Shuffle until the scrambled
-       version is different.
+       Shuffle the word.
     */
 
     let scrambled =
         shuffleWord(currentScramble);
+
+
+    /*
+       Make sure it isn't
+       accidentally unchanged.
+    */
 
     while (
         scrambled === currentScramble
@@ -1598,7 +1603,7 @@ function newScramble() {
 
 
     /*
-       Clear previous answer.
+       Clear answer.
     */
 
     document.getElementById(
@@ -1616,7 +1621,7 @@ function newScramble() {
 
 
     /*
-       Put the cursor back in the answer box.
+       Focus the answer box.
     */
 
     document.getElementById(
@@ -1631,11 +1636,24 @@ function newScramble() {
 
 function checkScramble() {
 
-    let answer =
+    /*
+       Prevent multiple submissions
+       while moving to the next word.
+    */
+
+    if (scrambleLocked) {
+        return;
+    }
+
+
+    let input =
         document.getElementById(
             "scrambleInput"
-        )
-        .value
+        );
+
+
+    let answer =
+        input.value
         .trim()
         .toUpperCase();
 
@@ -1647,19 +1665,24 @@ function checkScramble() {
 
 
     /*
-       Do not allow an empty answer.
+       Don't allow empty answers.
     */
 
     if (answer === "") {
-
         return;
     }
 
 
     /*
+       Lock the question.
+    */
+
+    scrambleLocked = true;
+
+
+    /*
        Check answer.
-       toUpperCase() makes it
-       NOT case sensitive.
+       This is NOT case sensitive.
     */
 
     if (
@@ -1689,11 +1712,11 @@ function checkScramble() {
 
 
     /*
-       Move to the next question.
+       Move to the next word
+       after 1.2 seconds.
     */
 
     scrambleQuestion++;
-
 
     setTimeout(
         newScramble,
@@ -1708,27 +1731,30 @@ function checkScramble() {
 
 function restartScramble() {
 
-    /*
-       Rebuild the Word Scramble screen.
-    */
+    remainingWords = [];
+
+    currentScramble = "";
+
+    scrambleScore = 0;
+
+    scrambleQuestion = 0;
+
+    scrambleLocked = false;
+
 
     document.querySelector(
         "#scrambleScreen .game-content"
     ).innerHTML = `
 
-        <div
-            id="scrambleProgress"
-            class="scramble-info">
+        <div class="scramble-info">
 
-            Word 1 of 5
+            <div id="scrambleProgress">
+                Word 1 of 5
+            </div>
 
-        </div>
-
-
-        <div
-            class="scramble-info">
-
-            Unscramble this word:
+            <div>
+                Unscramble this word:
+            </div>
 
         </div>
 
@@ -1747,15 +1773,6 @@ function restartScramble() {
             autocomplete="off">
 
 
-        <button
-            class="primary-button"
-            onclick="checkScramble()">
-
-            CHECK ANSWER
-
-        </button>
-
-
         <div
             id="scrambleFeedback"
             class="feedback">
@@ -1764,27 +1781,12 @@ function restartScramble() {
     `;
 
 
-    /*
-       Reset the game.
-    */
-
-    remainingWords = [];
-
-    scrambleScore = 0;
-
-    scrambleQuestion = 0;
-
-
-    /*
-       Start first word.
-    */
-
     newScramble();
 }
 
 
 /* =========================================================
-   PRESS ENTER TO CHECK ANSWER
+   PRESS ENTER TO SUBMIT
 ========================================================= */
 
 document.addEventListener(
