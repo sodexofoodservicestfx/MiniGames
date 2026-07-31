@@ -1444,82 +1444,152 @@ document.addEventListener(
 ========================================================= */
 
 const scrambleWords = [
-
-    "STFX",
-    "CAMPUS",
     "MORRISON",
-    "MEALHALL",
-    "ANTIGONISH",
-    "STUDENT",
+    "XAVIER",
+    "SODEXO",
     "UNIVERSITY",
-    "TRADITION",
-    "XAVERIAN",
-    "SCHOLAR",
-    "COMMUNITY",
-    "DINING"
-
+    "ANTIGONISH"
 ];
 
-
+let remainingWords = [];
 let currentScramble = "";
+let scrambleScore = 0;
+let scrambleQuestion = 0;
 
+
+/* =========================================================
+   SHUFFLE WORD
+========================================================= */
 
 function shuffleWord(word) {
 
-    let letters =
-        word.split("");
-
+    let letters = word.split("");
 
     for (
-        let i =
-            letters.length - 1;
-
+        let i = letters.length - 1;
         i > 0;
-
         i--
     ) {
 
-        let j =
-            Math.floor(
-                Math.random() *
-                (i + 1)
-            );
-
+        let j = Math.floor(
+            Math.random() * (i + 1)
+        );
 
         [
             letters[i],
             letters[j]
         ] = [
-
             letters[j],
             letters[i]
-
         ];
-
     }
 
-
     return letters.join("");
-
 }
 
 
+/* =========================================================
+   START / NEXT WORD
+========================================================= */
+
 function newScramble() {
 
-    currentScramble =
-        scrambleWords[
-            Math.floor(
-                Math.random() *
-                scrambleWords.length
-            )
-        ];
+    /*
+       Start a new set of 5 words
+       if there are no words remaining.
+    */
 
+    if (remainingWords.length === 0) {
 
-    let scrambled =
-        shuffleWord(
-            currentScramble
+        remainingWords = [...scrambleWords];
+
+        remainingWords.sort(
+            () => Math.random() - 0.5
         );
 
+        scrambleScore = 0;
+        scrambleQuestion = 0;
+    }
+
+
+    /*
+       If all 5 questions are finished,
+       show the final score.
+    */
+
+    if (scrambleQuestion >= 5) {
+
+        document.querySelector(
+            "#scrambleScreen .game-content"
+        ).innerHTML = `
+
+            <div class="game-over">
+
+                <h2>
+                    🎉 Great Job!
+                </h2>
+
+                <div class="final-score">
+
+                    You got
+                    ${scrambleScore}
+                    / 5 correct!
+
+                </div>
+
+                <button
+                    class="primary-button"
+                    onclick="restartScramble()">
+
+                    PLAY AGAIN
+
+                </button>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    /*
+       Pick the next word.
+    */
+
+    currentScramble =
+        remainingWords.pop();
+
+
+    /*
+       Shuffle until the scrambled
+       version is different.
+    */
+
+    let scrambled =
+        shuffleWord(currentScramble);
+
+    while (
+        scrambled === currentScramble
+    ) {
+
+        scrambled =
+            shuffleWord(currentScramble);
+    }
+
+
+    /*
+       Display progress.
+    */
+
+    document.getElementById(
+        "scrambleProgress"
+    ).textContent =
+        `Word ${scrambleQuestion + 1} of 5`;
+
+
+    /*
+       Display scrambled word.
+    */
 
     document.getElementById(
         "scrambledWord"
@@ -1527,26 +1597,45 @@ function newScramble() {
         scrambled;
 
 
+    /*
+       Clear previous answer.
+    */
+
     document.getElementById(
         "scrambleInput"
-    ).value =
-        "";
+    ).value = "";
 
+
+    /*
+       Clear feedback.
+    */
 
     document.getElementById(
         "scrambleFeedback"
-    ).textContent =
-        "";
+    ).textContent = "";
 
+
+    /*
+       Put the cursor back in the answer box.
+    */
+
+    document.getElementById(
+        "scrambleInput"
+    ).focus();
 }
 
+
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
 
 function checkScramble() {
 
     let answer =
         document.getElementById(
             "scrambleInput"
-        ).value
+        )
+        .value
         .trim()
         .toUpperCase();
 
@@ -1557,38 +1646,172 @@ function checkScramble() {
         );
 
 
+    /*
+       Do not allow an empty answer.
+    */
+
+    if (answer === "") {
+
+        return;
+    }
+
+
+    /*
+       Check answer.
+       toUpperCase() makes it
+       NOT case sensitive.
+    */
+
     if (
         answer ===
-        currentScramble
+        currentScramble.toUpperCase()
     ) {
 
-        feedback.textContent =
-            "✓ Correct! Great job!";
-
+        scrambleScore++;
 
         feedback.style.color =
             "#76e6a2";
+
+        feedback.textContent =
+            "✓ Correct!";
 
     }
 
     else {
 
-        feedback.textContent =
-            "✗ Not quite. Try again!";
-
-
         feedback.style.color =
             "#ff9b9b";
 
+        feedback.textContent =
+            `✗ Incorrect! The answer was ${currentScramble}`;
+
     }
 
+
+    /*
+       Move to the next question.
+    */
+
+    scrambleQuestion++;
+
+
+    setTimeout(
+        newScramble,
+        1200
+    );
 }
 
 
+/* =========================================================
+   RESTART GAME
+========================================================= */
+
+function restartScramble() {
+
+    /*
+       Rebuild the Word Scramble screen.
+    */
+
+    document.querySelector(
+        "#scrambleScreen .game-content"
+    ).innerHTML = `
+
+        <div
+            id="scrambleProgress"
+            class="scramble-info">
+
+            Word 1 of 5
+
+        </div>
+
+
+        <div
+            class="scramble-info">
+
+            Unscramble this word:
+
+        </div>
+
+
+        <div
+            id="scrambledWord"
+            class="scramble-word">
+        </div>
+
+
+        <input
+            id="scrambleInput"
+            class="scramble-input"
+            type="text"
+            placeholder="Type your answer"
+            autocomplete="off">
+
+
+        <button
+            class="primary-button"
+            onclick="checkScramble()">
+
+            CHECK ANSWER
+
+        </button>
+
+
+        <div
+            id="scrambleFeedback"
+            class="feedback">
+        </div>
+
+    `;
+
+
+    /*
+       Reset the game.
+    */
+
+    remainingWords = [];
+
+    scrambleScore = 0;
+
+    scrambleQuestion = 0;
+
+
+    /*
+       Start first word.
+    */
+
+    newScramble();
+}
+
+
+/* =========================================================
+   PRESS ENTER TO CHECK ANSWER
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" &&
+            document
+                .getElementById("scrambleScreen")
+                .classList
+                .contains("active")
+        ) {
+
+            checkScramble();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   START FIRST WORD
+========================================================= */
+
 newScramble();
-
-
-
 /* =========================================================
    GUESS THE BUILDING
 ========================================================= */
