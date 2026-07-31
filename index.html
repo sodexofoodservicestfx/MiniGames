@@ -3148,16 +3148,16 @@ const challengeQuestions = [
         answer: "Tennis"
     },
 
-    {
-        question: "What is 15 + 15?",
-        options: [
-            "25",
-            "30",
-            "35",
-            "40"
-        ],
-        answer: "30"
-    },
+   {
+    question: "Which fictional character lives in a pineapple under the sea?",
+    options: [
+        "SpongeBob",
+        "Mickey Mouse",
+        "Shrek",
+        "Scooby-Doo"
+    ],
+    answer: "SpongeBob"
+},
 
     {
         question: "Which color is made by mixing red and blue?",
@@ -3924,8 +3924,8 @@ const memorySymbols = [
     "📚",
     "🎓",
     "🍎",
-    "🏐",
-    "☕",
+   "STFXlogo.png",
+    "xring.png",
     "🌊"
 
 ];
@@ -4038,11 +4038,14 @@ function createMemoryBoard() {
                         ?
                     </div>
 
-                    <div class="memory-back">
-                        ${symbol}
-                    </div>
-
-                </div>
+                   <div class="memory-back">
+    ${
+        symbol.includes(".jpg") ||
+        symbol.includes(".png")
+            ? `<img src="${symbol}" alt="StFX Memory">`
+            : symbol
+    }
+</div>
 
             `;
 
