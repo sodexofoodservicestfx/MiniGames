@@ -1517,7 +1517,7 @@ function newScramble() {
 
     /*
        Create a new set of 5 words
-       when starting/restarting.
+       if there are no words remaining.
     */
 
     if (remainingWords.length === 0) {
@@ -1527,9 +1527,6 @@ function newScramble() {
         remainingWords.sort(
             () => Math.random() - 0.5
         );
-
-        scrambleScore = 0;
-        scrambleQuestion = 0;
     }
 
 
@@ -1537,44 +1534,44 @@ function newScramble() {
        Show final score after 5 words.
     */
 
-   if (scrambleQuestion >= 5) {
+    if (scrambleQuestion >= 5) {
 
-    document.querySelector(
-        "#scrambleScreen .game-content"
-    ).innerHTML = `
+        document.querySelector(
+            "#scrambleScreen .game-content"
+        ).innerHTML = `
 
-        <div class="game-over">
+            <div class="game-over">
 
-            <div class="game-over-icon">
-                🎉
+                <div class="game-over-icon">
+                    🎉
+                </div>
+
+                <h2>
+                    Game Complete!
+                </h2>
+
+                <div class="final-score-label">
+                    Your Score
+                </div>
+
+                <div class="final-score">
+                    ${scrambleScore} / 5
+                </div>
+
+                <button
+                    class="primary-button"
+                    onclick="restartScramble()">
+
+                    PLAY AGAIN
+
+                </button>
+
             </div>
 
-            <h2>
-                Game Complete!
-            </h2>
+        `;
 
-            <div class="final-score-label">
-                Your Score
-            </div>
-
-            <div class="final-score">
-                ${scrambleScore} / 5
-            </div>
-
-            <button
-                class="primary-button"
-                onclick="restartScramble()">
-
-                PLAY AGAIN
-
-            </button>
-
-        </div>
-
-    `;
-
-    return;
-}
+        return;
+    }
 
 
     /*
@@ -1594,8 +1591,8 @@ function newScramble() {
 
 
     /*
-       Make sure it isn't
-       accidentally unchanged.
+       Make sure the scrambled word
+       is different from the answer.
     */
 
     while (
@@ -1652,6 +1649,7 @@ function newScramble() {
     document.getElementById(
         "scrambleInput"
     ).focus();
+
 }
 
 
@@ -1662,8 +1660,7 @@ function newScramble() {
 function checkScramble() {
 
     /*
-       Prevent multiple submissions
-       while moving to the next word.
+       Prevent multiple submissions.
     */
 
     if (scrambleLocked) {
@@ -1699,7 +1696,7 @@ function checkScramble() {
 
 
     /*
-       Lock the question.
+       Lock the current question.
     */
 
     scrambleLocked = true;
@@ -1737,16 +1734,17 @@ function checkScramble() {
 
 
     /*
-       Move to the next word
-       after 1.2 seconds.
+       Move to the next question.
     */
 
     scrambleQuestion++;
+
 
     setTimeout(
         newScramble,
         1200
     );
+
 }
 
 
@@ -1767,19 +1765,26 @@ function restartScramble() {
     scrambleLocked = false;
 
 
+    /*
+       Restore the Word Scramble screen.
+    */
+
     document.querySelector(
         "#scrambleScreen .game-content"
     ).innerHTML = `
 
+        <div
+            id="scrambleProgress"
+            class="scramble-info">
+
+            Word 1 of 5
+
+        </div>
+
+
         <div class="scramble-info">
 
-            <div id="scrambleProgress">
-                Word 1 of 5
-            </div>
-
-            <div>
-                Unscramble this word:
-            </div>
+            Unscramble this word:
 
         </div>
 
@@ -1806,7 +1811,12 @@ function restartScramble() {
     `;
 
 
+    /*
+       Start the first word again.
+    */
+
     newScramble();
+
 }
 
 
@@ -1837,6 +1847,12 @@ document.addEventListener(
 /* =========================================================
    START FIRST WORD
 ========================================================= */
+
+remainingWords = [];
+
+scrambleScore = 0;
+
+scrambleQuestion = 0;
 
 newScramble();
 /* =========================================================
