@@ -2142,15 +2142,16 @@ function loadBuilding() {
 function checkBuilding(answer) {
 
     /*
-       Prevent multiple clicks
-       after a correct answer.
+       Prevent multiple clicks while
+       moving to the next building.
     */
 
     if (buildingLocked) {
-
         return;
-
     }
+
+
+    buildingLocked = true;
 
 
     let feedback =
@@ -2160,7 +2161,7 @@ function checkBuilding(answer) {
 
 
     /*
-       CORRECT
+       Check the answer.
     */
 
     if (
@@ -2168,72 +2169,63 @@ function checkBuilding(answer) {
         currentBuilding.name
     ) {
 
-        buildingLocked = true;
-
-
         buildingScore++;
-
 
         feedback.textContent =
             "✓ Correct!";
 
-
         feedback.style.color =
             "#76e6a2";
 
-
-        buildingQuestion++;
-
-
-        /*
-           If this was the 5th building,
-           show the final score.
-        */
-
-        if (
-            buildingQuestion >= 5
-        ) {
-
-            setTimeout(
-                showBuildingFinalScore,
-                1200
-            );
-
-            return;
-
-        }
-
-
-        /*
-           Move to the next building.
-        */
-
-        setTimeout(
-            loadBuilding,
-            1200
-        );
-
     }
-
-
-    /*
-       INCORRECT
-    */
 
     else {
 
         feedback.textContent =
-            "✗ Try again!";
-
+            "✗ Incorrect!";
 
         feedback.style.color =
             "#ff9b9b";
 
     }
 
+
+    /*
+       Count this question.
+    */
+
+    buildingQuestion++;
+
+
+    /*
+       After the 5th answer,
+       show the final score.
+    */
+
+    if (
+        buildingQuestion >= 5
+    ) {
+
+        setTimeout(
+            showBuildingFinalScore,
+            1000
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Move to the next building.
+    */
+
+    setTimeout(
+        loadBuilding,
+        1000
+    );
+
 }
-
-
 /* =========================================================
    FINAL SCORE SCREEN
 ========================================================= */
