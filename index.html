@@ -4439,118 +4439,830 @@ function resetMemoryTurn() {
 /* =========================================================
    HIGHER OR LOWER
 ========================================================= */
-
 const higherLowerFoods = [
+
+    // FRUITS
+
     {
         name: "Apple",
         emoji: "🍎",
-        calories: 95
+        calories: 52,
+        protein: 0.3,
+        sugar: 10.4
     },
 
     {
         name: "Banana",
         emoji: "🍌",
-        calories: 105
-    },
-
-    {
-        name: "Pizza",
-        emoji: "🍕",
-        calories: 285
-    },
-
-    {
-        name: "Cheeseburger",
-        emoji: "🍔",
-        calories: 520
-    },
-
-    {
-        name: "French Fries",
-        emoji: "🍟",
-        calories: 365
-    },
-
-    {
-        name: "Salad",
-        emoji: "🥗",
-        calories: 150
-    },
-
-    {
-        name: "Donut",
-        emoji: "🍩",
-        calories: 270
-    },
-
-    {
-        name: "Ice Cream",
-        emoji: "🍦",
-        calories: 210
-    },
-
-    {
-        name: "Chicken Sandwich",
-        emoji: "🥪",
-        calories: 430
-    },
-
-    {
-        name: "Taco",
-        emoji: "🌮",
-        calories: 190
-    },
-
-    {
-        name: "Hot Dog",
-        emoji: "🌭",
-        calories: 290
-    },
-
-    {
-        name: "Chocolate Bar",
-        emoji: "🍫",
-        calories: 230
+        calories: 89,
+        protein: 1.1,
+        sugar: 12.2
     },
 
     {
         name: "Orange",
         emoji: "🍊",
-        calories: 62
+        calories: 47,
+        protein: 0.9,
+        sugar: 9.4
     },
 
     {
-        name: "Bagel",
-        emoji: "🥯",
-        calories: 270
+        name: "Strawberries",
+        emoji: "🍓",
+        calories: 32,
+        protein: 0.7,
+        sugar: 4.9
+    },
+
+    {
+        name: "Blueberries",
+        emoji: "🫐",
+        calories: 57,
+        protein: 0.7,
+        sugar: 10.0
+    },
+
+    {
+        name: "Grapes",
+        emoji: "🍇",
+        calories: 69,
+        protein: 0.7,
+        sugar: 15.5
+    },
+
+    {
+        name: "Watermelon",
+        emoji: "🍉",
+        calories: 30,
+        protein: 0.6,
+        sugar: 6.2
+    },
+
+    {
+        name: "Pineapple",
+        emoji: "🍍",
+        calories: 50,
+        protein: 0.5,
+        sugar: 9.9
+    },
+
+    {
+        name: "Mango",
+        emoji: "🥭",
+        calories: 60,
+        protein: 0.8,
+        sugar: 13.7
+    },
+
+    {
+        name: "Peach",
+        emoji: "🍑",
+        calories: 39,
+        protein: 0.9,
+        sugar: 8.4
+    },
+
+    {
+        name: "Pear",
+        emoji: "🍐",
+        calories: 57,
+        protein: 0.4,
+        sugar: 9.8
+    },
+
+    {
+        name: "Kiwi",
+        emoji: "🥝",
+        calories: 61,
+        protein: 1.1,
+        sugar: 8.7
+    },
+
+    {
+        name: "Raspberries",
+        emoji: "🫐",
+        calories: 52,
+        protein: 1.2,
+        sugar: 4.4
+    },
+
+    {
+        name: "Blackberries",
+        emoji: "🫐",
+        calories: 43,
+        protein: 1.4,
+        sugar: 4.9
+    },
+
+    {
+        name: "Cherries",
+        emoji: "🍒",
+        calories: 63,
+        protein: 1.1,
+        sugar: 12.8
+    },
+
+
+    // VEGETABLES
+
+    {
+        name: "Avocado",
+        emoji: "🥑",
+        calories: 160,
+        protein: 2.0,
+        sugar: 0.7
+    },
+
+    {
+        name: "Potato",
+        emoji: "🥔",
+        calories: 77,
+        protein: 2.0,
+        sugar: 0.8
+    },
+
+    {
+        name: "Sweet Potato",
+        emoji: "🍠",
+        calories: 86,
+        protein: 1.6,
+        sugar: 4.2
+    },
+
+    {
+        name: "Carrots",
+        emoji: "🥕",
+        calories: 41,
+        protein: 0.9,
+        sugar: 4.7
+    },
+
+    {
+        name: "Broccoli",
+        emoji: "🥦",
+        calories: 35,
+        protein: 2.4,
+        sugar: 1.4
+    },
+
+    {
+        name: "Corn",
+        emoji: "🌽",
+        calories: 86,
+        protein: 3.3,
+        sugar: 6.3
+    },
+
+    {
+        name: "Tomato",
+        emoji: "🍅",
+        calories: 18,
+        protein: 0.9,
+        sugar: 2.6
+    },
+
+    {
+        name: "Cucumber",
+        emoji: "🥒",
+        calories: 15,
+        protein: 0.7,
+        sugar: 1.7
+    },
+
+    {
+        name: "Bell Pepper",
+        emoji: "🫑",
+        calories: 31,
+        protein: 1.0,
+        sugar: 4.2
+    },
+
+    {
+        name: "Green Beans",
+        emoji: "🫛",
+        calories: 31,
+        protein: 1.8,
+        sugar: 3.3
+    },
+
+
+    // BREAKFAST FOODS
+
+    {
+        name: "Egg",
+        emoji: "🥚",
+        calories: 143,
+        protein: 12.6,
+        sugar: 0.4
+    },
+
+    {
+        name: "Scrambled Eggs",
+        emoji: "🍳",
+        calories: 149,
+        protein: 10.0,
+        sugar: 1.0
+    },
+
+    {
+        name: "Bacon",
+        emoji: "🥓",
+        calories: 541,
+        protein: 37.0,
+        sugar: 0
+    },
+
+    {
+        name: "Sausage",
+        emoji: "🌭",
+        calories: 301,
+        protein: 12.0,
+        sugar: 1.0
     },
 
     {
         name: "Pancakes",
         emoji: "🥞",
-        calories: 350
+        calories: 227,
+        protein: 6.0,
+        sugar: 5.0
+    },
+
+    {
+        name: "Waffle",
+        emoji: "🧇",
+        calories: 291,
+        protein: 7.9,
+        sugar: 8.0
+    },
+
+    {
+        name: "French Toast",
+        emoji: "🍞",
+        calories: 229,
+        protein: 6.7,
+        sugar: 4.8
+    },
+
+    {
+        name: "Oatmeal",
+        emoji: "🥣",
+        calories: 71,
+        protein: 2.5,
+        sugar: 0.3
+    },
+
+    {
+        name: "Cereal",
+        emoji: "🥣",
+        calories: 379,
+        protein: 7.0,
+        sugar: 15.0
+    },
+
+    {
+        name: "Granola",
+        emoji: "🥣",
+        calories: 471,
+        protein: 10.0,
+        sugar: 24.0
+    },
+
+    {
+        name: "Bagel",
+        emoji: "🥯",
+        calories: 250,
+        protein: 10.0,
+        sugar: 5.0
+    },
+
+    {
+        name: "English Muffin",
+        emoji: "🍞",
+        calories: 227,
+        protein: 8.0,
+        sugar: 2.0
+    },
+
+    {
+        name: "White Bread",
+        emoji: "🍞",
+        calories: 266,
+        protein: 8.9,
+        sugar: 5.0
+    },
+
+
+    // MEAT & SEAFOOD
+
+    {
+        name: "Chicken Breast",
+        emoji: "🍗",
+        calories: 165,
+        protein: 31.0,
+        sugar: 0
     },
 
     {
         name: "Chicken Nuggets",
         emoji: "🍗",
-        calories: 250
+        calories: 296,
+        protein: 15.5,
+        sugar: 0.5
+    },
+
+    {
+        name: "Chicken Wings",
+        emoji: "🍗",
+        calories: 254,
+        protein: 23.0,
+        sugar: 0
+    },
+
+    {
+        name: "Fried Chicken",
+        emoji: "🍗",
+        calories: 246,
+        protein: 20.0,
+        sugar: 0
+    },
+
+    {
+        name: "Turkey",
+        emoji: "🍗",
+        calories: 189,
+        protein: 29.0,
+        sugar: 0
+    },
+
+    {
+        name: "Ham",
+        emoji: "🥩",
+        calories: 145,
+        protein: 21.0,
+        sugar: 1.0
+    },
+
+    {
+        name: "Steak",
+        emoji: "🥩",
+        calories: 271,
+        protein: 25.0,
+        sugar: 0
+    },
+
+    {
+        name: "Ground Beef",
+        emoji: "🥩",
+        calories: 254,
+        protein: 26.0,
+        sugar: 0
+    },
+
+    {
+        name: "Salmon",
+        emoji: "🐟",
+        calories: 208,
+        protein: 20.4,
+        sugar: 0
+    },
+
+    {
+        name: "Tuna",
+        emoji: "🐟",
+        calories: 132,
+        protein: 28.0,
+        sugar: 0
+    },
+
+    {
+        name: "Shrimp",
+        emoji: "🍤",
+        calories: 99,
+        protein: 24.0,
+        sugar: 0
+    },
+
+
+    // SANDWICHES & FAST FOOD
+
+    {
+        name: "Chicken Sandwich",
+        emoji: "🥪",
+        calories: 250,
+        protein: 15.0,
+        sugar: 3.0
+    },
+
+    {
+        name: "Turkey Sandwich",
+        emoji: "🥪",
+        calories: 230,
+        protein: 16.0,
+        sugar: 3.0
+    },
+
+    {
+        name: "Ham Sandwich",
+        emoji: "🥪",
+        calories: 250,
+        protein: 15.0,
+        sugar: 3.0
+    },
+
+    {
+        name: "Tuna Sandwich",
+        emoji: "🥪",
+        calories: 220,
+        protein: 14.0,
+        sugar: 3.0
     },
 
     {
         name: "Grilled Cheese",
         emoji: "🧀",
-        calories: 400
+        calories: 350,
+        protein: 13.0,
+        sugar: 3.0
+    },
+
+    {
+        name: "Hamburger",
+        emoji: "🍔",
+        calories: 250,
+        protein: 17.0,
+        sugar: 4.0
+    },
+
+    {
+        name: "Cheeseburger",
+        emoji: "🍔",
+        calories: 295,
+        protein: 17.0,
+        sugar: 4.0
+    },
+
+    {
+        name: "Bacon Cheeseburger",
+        emoji: "🍔",
+        calories: 330,
+        protein: 18.0,
+        sugar: 5.0
+    },
+
+    {
+        name: "Hot Dog",
+        emoji: "🌭",
+        calories: 290,
+        protein: 10.0,
+        sugar: 1.5
+    },
+
+    {
+        name: "Corn Dog",
+        emoji: "🌭",
+        calories: 270,
+        protein: 8.0,
+        sugar: 8.0
+    },
+
+    {
+        name: "French Fries",
+        emoji: "🍟",
+        calories: 312,
+        protein: 3.4,
+        sugar: 0.3
+    },
+
+    {
+        name: "Onion Rings",
+        emoji: "🧅",
+        calories: 411,
+        protein: 4.0,
+        sugar: 5.0
+    },
+
+
+    // PIZZA, MEXICAN & PASTA
+
+    {
+        name: "Pizza",
+        emoji: "🍕",
+        calories: 266,
+        protein: 11.0,
+        sugar: 3.6
+    },
+
+    {
+        name: "Pepperoni Pizza",
+        emoji: "🍕",
+        calories: 298,
+        protein: 12.0,
+        sugar: 3.0
+    },
+
+    {
+        name: "Taco",
+        emoji: "🌮",
+        calories: 226,
+        protein: 9.0,
+        sugar: 1.5
+    },
+
+    {
+        name: "Chicken Taco",
+        emoji: "🌮",
+        calories: 210,
+        protein: 14.0,
+        sugar: 1.5
+    },
+
+    {
+        name: "Burrito",
+        emoji: "🌯",
+        calories: 180,
+        protein: 8.0,
+        sugar: 2.0
+    },
+
+    {
+        name: "Quesadilla",
+        emoji: "🧀",
+        calories: 310,
+        protein: 14.0,
+        sugar: 2.0
+    },
+
+    {
+        name: "Nachos",
+        emoji: "🧀",
+        calories: 346,
+        protein: 7.0,
+        sugar: 2.0
+    },
+
+    {
+        name: "Spaghetti",
+        emoji: "🍝",
+        calories: 157,
+        protein: 5.8,
+        sugar: 0.6
+    },
+
+    {
+        name: "Lasagna",
+        emoji: "🍝",
+        calories: 135,
+        protein: 7.0,
+        sugar: 3.0
+    },
+
+    {
+        name: "Mac and Cheese",
+        emoji: "🧀",
+        calories: 164,
+        protein: 7.0,
+        sugar: 3.0
+    },
+
+
+    // DAIRY
+
+    {
+        name: "Milk",
+        emoji: "🥛",
+        calories: 61,
+        protein: 3.2,
+        sugar: 5.1
+    },
+
+    {
+        name: "Chocolate Milk",
+        emoji: "🥛",
+        calories: 83,
+        protein: 3.2,
+        sugar: 10.3
     },
 
     {
         name: "Yogurt",
         emoji: "🥛",
-        calories: 120
+        calories: 61,
+        protein: 3.5,
+        sugar: 4.7
+    },
+
+    {
+        name: "Greek Yogurt",
+        emoji: "🥛",
+        calories: 59,
+        protein: 10.0,
+        sugar: 3.6
+    },
+
+    {
+        name: "Cheddar Cheese",
+        emoji: "🧀",
+        calories: 403,
+        protein: 25.0,
+        sugar: 0.5
+    },
+
+    {
+        name: "Mozzarella",
+        emoji: "🧀",
+        calories: 280,
+        protein: 28.0,
+        sugar: 1.0
+    },
+
+
+    // SNACKS
+
+    {
+        name: "Popcorn",
+        emoji: "🍿",
+        calories: 387,
+        protein: 13.0,
+        sugar: 0.9
+    },
+
+    {
+        name: "Potato Chips",
+        emoji: "🥔",
+        calories: 536,
+        protein: 7.0,
+        sugar: 0.3
+    },
+
+    {
+        name: "Pretzels",
+        emoji: "🥨",
+        calories: 380,
+        protein: 10.0,
+        sugar: 2.0
+    },
+
+    {
+        name: "Trail Mix",
+        emoji: "🥜",
+        calories: 462,
+        protein: 14.0,
+        sugar: 24.0
+    },
+
+    {
+        name: "Peanut Butter",
+        emoji: "🥜",
+        calories: 588,
+        protein: 25.0,
+        sugar: 9.0
+    },
+
+    {
+        name: "Almonds",
+        emoji: "🥜",
+        calories: 579,
+        protein: 21.2,
+        sugar: 4.4
+    },
+
+    {
+        name: "Granola Bar",
+        emoji: "🍫",
+        calories: 400,
+        protein: 7.0,
+        sugar: 20.0
+    },
+
+
+    // DESSERTS
+
+    {
+        name: "Donut",
+        emoji: "🍩",
+        calories: 452,
+        protein: 4.9,
+        sugar: 22.0
+    },
+
+    {
+        name: "Brownie",
+        emoji: "🍫",
+        calories: 466,
+        protein: 6.0,
+        sugar: 37.0
+    },
+
+    {
+        name: "Chocolate Bar",
+        emoji: "🍫",
+        calories: 535,
+        protein: 7.7,
+        sugar: 48.0
+    },
+
+    {
+        name: "Chocolate Chip Cookie",
+        emoji: "🍪",
+        calories: 488,
+        protein: 6.5,
+        sugar: 30.0
+    },
+
+    {
+        name: "Muffin",
+        emoji: "🧁",
+        calories: 377,
+        protein: 7.0,
+        sugar: 25.0
+    },
+
+    {
+        name: "Cupcake",
+        emoji: "🧁",
+        calories: 350,
+        protein: 4.0,
+        sugar: 30.0
+    },
+
+    {
+        name: "Cheesecake",
+        emoji: "🍰",
+        calories: 321,
+        protein: 5.5,
+        sugar: 22.0
+    },
+
+    {
+        name: "Apple Pie",
+        emoji: "🥧",
+        calories: 237,
+        protein: 1.9,
+        sugar: 16.0
+    },
+
+    {
+        name: "Ice Cream",
+        emoji: "🍦",
+        calories: 207,
+        protein: 3.5,
+        sugar: 21.0
+    },
+
+
+    // DRINKS
+
+    {
+        name: "Apple Juice",
+        emoji: "🧃",
+        calories: 46,
+        protein: 0.1,
+        sugar: 9.6
+    },
+
+    {
+        name: "Orange Juice",
+        emoji: "🍊",
+        calories: 45,
+        protein: 0.7,
+        sugar: 8.4
+    },
+
+    {
+        name: "Lemonade",
+        emoji: "🍋",
+        calories: 40,
+        protein: 0,
+        sugar: 9.0
+    },
+
+    {
+        name: "Smoothie",
+        emoji: "🥤",
+        calories: 60,
+        protein: 1.5,
+        sugar: 12.0
+    },
+
+    {
+        name: "Milkshake",
+        emoji: "🥤",
+        calories: 150,
+        protein: 4.0,
+        sugar: 20.0
+    },
+
+    {
+        name: "Hot Chocolate",
+        emoji: "☕",
+        calories: 80,
+        protein: 3.0,
+        sugar: 11.0
     }
+
 ];
-
-
 /* =========================================================
    HIGHER OR LOWER VARIABLES
 ========================================================= */
@@ -4563,8 +5275,40 @@ let higherLowerRound = 0;
 
 let higherLowerLocked = false;
 
+let higherLowerCategory = "calories";
+
 const HIGHER_LOWER_HIGH_SCORE_KEY =
     "higherLowerHighScore";
+
+
+/* =========================================================
+   CATEGORY INFORMATION
+========================================================= */
+
+const higherLowerCategories = {
+
+    calories: {
+        name: "Calories",
+        emoji: "🔥",
+        question: "Which food has MORE calories?",
+        unit: "calories"
+    },
+
+    protein: {
+        name: "Protein",
+        emoji: "💪",
+        question: "Which food has MORE protein?",
+        unit: "g protein"
+    },
+
+    sugar: {
+        name: "Sugar",
+        emoji: "🍬",
+        question: "Which food has MORE sugar?",
+        unit: "g sugar"
+    }
+
+};
 
 
 /* =========================================================
@@ -4617,6 +5361,112 @@ function openHigherLowerGame() {
         "higherLowerScreen"
     );
 
+    showHigherLowerCategorySelection();
+
+}
+
+
+/* =========================================================
+   CATEGORY SELECTION
+========================================================= */
+
+function showHigherLowerCategorySelection() {
+
+    document.querySelector(
+        "#higherLowerScreen .game-content"
+    ).innerHTML = `
+
+        <div class="higher-lower-category-screen">
+
+            <div class="higher-lower-category-title">
+                HIGHER OR LOWER
+            </div>
+
+            <div class="higher-lower-category-subtitle">
+                Choose what you want to compare
+            </div>
+
+
+            <div class="higher-lower-category-buttons">
+
+
+                <button
+                    class="higher-lower-category-button"
+                    onclick="selectHigherLowerCategory('calories')"
+                >
+
+                    <div class="category-emoji">
+                        🔥
+                    </div>
+
+                    <div class="category-name">
+                        CALORIES
+                    </div>
+
+                    <div class="category-description">
+                        Which food has more calories?
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="higher-lower-category-button"
+                    onclick="selectHigherLowerCategory('protein')"
+                >
+
+                    <div class="category-emoji">
+                        💪
+                    </div>
+
+                    <div class="category-name">
+                        PROTEIN
+                    </div>
+
+                    <div class="category-description">
+                        Which food has more protein?
+                    </div>
+
+                </button>
+
+
+                <button
+                    class="higher-lower-category-button"
+                    onclick="selectHigherLowerCategory('sugar')"
+                >
+
+                    <div class="category-emoji">
+                        🍬
+                    </div>
+
+                    <div class="category-name">
+                        SUGAR
+                    </div>
+
+                    <div class="category-description">
+                        Which food has more sugar?
+                    </div>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SELECT CATEGORY
+========================================================= */
+
+function selectHigherLowerCategory(category) {
+
+    higherLowerCategory = category;
+
     startHigherLowerGame();
 
 }
@@ -4636,7 +5486,6 @@ function startHigherLowerGame() {
 
 
     /*
-       IMPORTANT:
        Choose the first food before loading
        the first round.
     */
@@ -4650,7 +5499,149 @@ function startHigherLowerGame() {
         ];
 
 
+    /*
+       Rebuild the game screen
+       after category selection.
+    */
+
+    document.querySelector(
+        "#higherLowerScreen .game-content"
+    ).innerHTML = `
+
+        <div
+            id="higherLowerProgress"
+            class="higher-lower-progress"
+        >
+        </div>
+
+
+        <div
+            id="higherLowerCategory"
+            class="higher-lower-category"
+        >
+        </div>
+
+
+        <div class="higher-lower-question">
+        </div>
+
+
+        <div class="food-choice-container">
+
+            <button
+                id="foodChoice1"
+                class="food-choice"
+                onclick="chooseHigherLower(0)"
+            >
+
+                <div
+                    id="foodEmoji1"
+                    class="food-emoji"
+                >
+                    🍎
+                </div>
+
+
+                <div
+                    id="foodName1"
+                    class="food-name"
+                >
+                    Apple
+                </div>
+
+
+                <div
+                    id="foodCalories1"
+                    class="food-calories"
+                >
+                </div>
+
+            </button>
+
+
+            <button
+                id="foodChoice2"
+                class="food-choice"
+                onclick="chooseHigherLower(1)"
+            >
+
+                <div
+                    id="foodEmoji2"
+                    class="food-emoji"
+                >
+                    🍕
+                </div>
+
+
+                <div
+                    id="foodName2"
+                    class="food-name"
+                >
+                    Pizza
+                </div>
+
+
+                <div
+                    id="foodCalories2"
+                    class="food-calories"
+                >
+                </div>
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="higherLowerFeedback"
+            class="higher-lower-feedback"
+        >
+        </div>
+
+    `;
+
+
     loadHigherLowerRound();
+
+}
+
+
+/* =========================================================
+   GET FOOD VALUE
+========================================================= */
+
+function getHigherLowerValue(food) {
+
+    return food[
+        higherLowerCategory
+    ];
+
+}
+
+
+/* =========================================================
+   FORMAT VALUE
+========================================================= */
+
+function formatHigherLowerValue(food) {
+
+    const value =
+        getHigherLowerValue(food);
+
+    const category =
+        higherLowerCategories[
+            higherLowerCategory
+        ];
+
+
+    if (higherLowerCategory === "calories") {
+
+        return `${value} kcal / 100g`;
+
+    }
+
+
+    return `${value}g / 100g`;
 
 }
 
@@ -4687,6 +5678,16 @@ function loadHigherLowerRound() {
 
 
     /*
+       Category information
+    */
+
+    const category =
+        higherLowerCategories[
+            higherLowerCategory
+        ];
+
+
+    /*
        Update score
     */
 
@@ -4698,6 +5699,26 @@ function loadHigherLowerRound() {
         "higherLowerProgress"
     ).textContent =
         `Score: ${higherLowerScore} | High Score: ${highScore}`;
+
+
+    /*
+       Show category
+    */
+
+    document.getElementById(
+        "higherLowerCategory"
+    ).textContent =
+        `${category.emoji} ${category.name.toUpperCase()} / 100G`;
+
+
+    /*
+       Question
+    */
+
+    document.querySelector(
+        ".higher-lower-question"
+    ).innerHTML =
+        `Which food has <strong>MORE</strong> ${category.name.toLowerCase()}?`;
 
 
     /*
@@ -4733,7 +5754,7 @@ function loadHigherLowerRound() {
 
 
     /*
-       Hide calories
+       Hide values until answer
     */
 
     document.getElementById(
@@ -4816,13 +5837,29 @@ function chooseHigherLower(choice) {
 
 
     /*
+       Get the selected category values
+    */
+
+    const selectedValue =
+        getHigherLowerValue(
+            selectedFood
+        );
+
+
+    const otherValue =
+        getHigherLowerValue(
+            otherFood
+        );
+
+
+    /*
        The selected food is correct if
-       it has MORE calories.
+       it has MORE of the selected category.
     */
 
     const correct =
-        selectedFood.calories >
-        otherFood.calories;
+        selectedValue >
+        otherValue;
 
 
     /*
@@ -4846,19 +5883,23 @@ function chooseHigherLower(choice) {
 
 
     /*
-       Reveal calories
+       Reveal values
     */
 
     document.getElementById(
         "foodCalories1"
     ).textContent =
-        `${higherLowerCurrentFood.calories} calories`;
+        formatHigherLowerValue(
+            higherLowerCurrentFood
+        );
 
 
     document.getElementById(
         "foodCalories2"
     ).textContent =
-        `${higherLowerNextFood.calories} calories`;
+        formatHigherLowerValue(
+            higherLowerNextFood
+        );
 
 
     /* =====================================================
@@ -4884,8 +5925,6 @@ function chooseHigherLower(choice) {
 
 
         /*
-           THIS IS THE IMPORTANT PART.
-
            The food the player correctly chose
            becomes the food that stays on the
            screen for the next round.
@@ -4969,6 +6008,12 @@ function showHigherLowerFinalScore() {
         oldHighScore;
 
 
+    const category =
+        higherLowerCategories[
+            higherLowerCategory
+        ];
+
+
     document.querySelector(
         "#higherLowerScreen .game-content"
     ).innerHTML = `
@@ -4987,6 +6032,18 @@ function showHigherLowerFinalScore() {
             <h2>
                 Game Over!
             </h2>
+
+
+            <div
+                style="
+                    font-size:20px;
+                    font-weight:bold;
+                    margin-bottom:15px;
+                "
+            >
+                ${category.emoji}
+                ${category.name}
+            </div>
 
 
             <div class="final-score-label">
@@ -5033,6 +6090,15 @@ function showHigherLowerFinalScore() {
                 PLAY AGAIN
             </button>
 
+
+            <button
+                class="primary-button"
+                onclick="showHigherLowerCategorySelection()"
+                style="margin-top:10px;"
+            >
+                CHANGE CATEGORY
+            </button>
+
         </div>
 
     `;
@@ -5046,106 +6112,13 @@ function showHigherLowerFinalScore() {
 
 function restartHigherLower() {
 
-    document.querySelector(
-        "#higherLowerScreen .game-content"
-    ).innerHTML = `
-
-        <div
-            id="higherLowerProgress"
-            class="higher-lower-progress"
-        >
-            Score: 0 | High Score: ${getHigherLowerHighScore()}
-        </div>
-
-
-        <div class="higher-lower-question">
-
-            Which food has
-            <strong>MORE</strong>
-            calories?
-
-        </div>
-
-
-        <div class="food-choice-container">
-
-            <button
-                id="foodChoice1"
-                class="food-choice"
-                onclick="chooseHigherLower(0)"
-            >
-
-                <div
-                    id="foodEmoji1"
-                    class="food-emoji"
-                >
-                    🍎
-                </div>
-
-
-                <div
-                    id="foodName1"
-                    class="food-name"
-                >
-                    Apple
-                </div>
-
-
-                <div
-                    id="foodCalories1"
-                    class="food-calories"
-                >
-                </div>
-
-            </button>
-
-
-            <button
-                id="foodChoice2"
-                class="food-choice"
-                onclick="chooseHigherLower(1)"
-            >
-
-                <div
-                    id="foodEmoji2"
-                    class="food-emoji"
-                >
-                    🍕
-                </div>
-
-
-                <div
-                    id="foodName2"
-                    class="food-name"
-                >
-                    Pizza
-                </div>
-
-
-                <div
-                    id="foodCalories2"
-                    class="food-calories"
-                >
-                </div>
-
-            </button>
-
-        </div>
-
-
-        <div
-            id="higherLowerFeedback"
-            class="higher-lower-feedback"
-        >
-        </div>
-
-    `;
-
+    /*
+       Restart using the SAME category.
+    */
 
     startHigherLowerGame();
 
 }
-
 
 /* =========================================================
    START 30 SECOND INACTIVITY TIMER
