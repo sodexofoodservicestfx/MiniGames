@@ -878,35 +878,40 @@ body {
 
 
 /* =========================================================
-       HIGHER OR LOWER - BIGGER CATEGORY BUTTONS
-    ========================================================= */
+   HIGHER OR LOWER - VERTICAL CATEGORY BUTTONS
+========================================================= */
 
-    .higher-lower-category-buttons {
-        gap: 20px;
-    }
+.higher-lower-category-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
 
-    .higher-lower-category-button {
-        min-height: 190px;
-        padding: 30px 25px;
-        border-radius: 20px;
-    }
+.higher-lower-category-button {
+    width: 100%;
+    min-height: 150px;
+    padding: 25px;
+    border-radius: 20px;
+}
 
-    .higher-lower-category-button .category-emoji {
-        font-size: 55px;
-        margin-bottom: 12px;
-    }
+.higher-lower-category-button .category-emoji {
+    font-size: 50px;
+    margin-bottom: 8px;
+}
 
-    .higher-lower-category-button .category-name {
-        font-size: 28px;
-        font-weight: 800;
-        margin-bottom: 10px;
-    }
+.higher-lower-category-button .category-name {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
 
-    .higher-lower-category-button .category-description {
-        font-size: 17px;
-        line-height: 1.4;
-    }
-
+.higher-lower-category-button .category-description {
+    font-size: 17px;
+    line-height: 1.4;
+}
 
 
 </style>
@@ -5662,12 +5667,12 @@ function formatHigherLowerValue(food) {
 
     if (higherLowerCategory === "calories") {
 
-        return `${value} kcal / 100g`;
+        return `${value} cal`;
 
     }
 
 
-    return `${value}g / 100g`;
+    return `${value}g`;
 
 }
 
@@ -5734,7 +5739,7 @@ function loadHigherLowerRound() {
     document.getElementById(
         "higherLowerCategory"
     ).textContent =
-        `${category.emoji} ${category.name.toUpperCase()} / 100G`;
+        `${category.emoji} ${category.name.toUpperCase()} `;
 
 
     /*
