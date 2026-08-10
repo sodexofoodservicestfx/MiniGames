@@ -181,8 +181,8 @@ body {
 .game-grid {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 210px);
-    gap: 24px;
+    grid-template-rows: repeat(5, 170px);
+    gap: 18px;
     width: 98%;
 }
 
@@ -301,7 +301,14 @@ body {
             #8e44c7
         );
 }
-
+.higher-lower-card {
+    background:
+        linear-gradient(
+            135deg,
+            #b85c16,
+            #e58b25
+        );
+}
 
 /* =========================================================
    GAME SCREEN
@@ -734,6 +741,101 @@ body {
 }
 
 /* =========================================================
+   HIGHER OR LOWER
+========================================================= */
+
+#higherLowerScreen {
+    background:
+        radial-gradient(
+            circle at center,
+            #8a4814,
+            #241205
+        );
+}
+
+.higher-lower-progress {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.higher-lower-question {
+    font-size: 30px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.food-card {
+    width: 500px;
+    max-width: 90%;
+    min-height: 220px;
+
+    background: white;
+    color: #5b3210;
+
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.35);
+}
+
+.food-emoji {
+    font-size: 70px;
+    margin-bottom: 10px;
+}
+
+.food-name {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.food-calories {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.higher-lower-buttons {
+    display: flex;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.higher-lower-button {
+    width: 240px;
+    min-height: 75px;
+
+    border: none;
+    border-radius: 18px;
+
+    background: white;
+    color: #6b390f;
+
+    font-size: 25px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.higher-lower-button:active {
+    transform: scale(0.96);
+}
+
+.higher-lower-feedback {
+    height: 45px;
+    margin-top: 20px;
+
+    font-size: 25px;
+    font-weight: bold;
+}
+      
+/* =========================================================
    GAME OVER
 ========================================================= */
 
@@ -942,6 +1044,25 @@ body {
             </p>
 
            
+
+        </button>
+
+            <!-- HIGHER OR LOWER -->
+
+        <button class="game-card higher-lower-card"
+                onclick="openHigherLowerGame()">
+
+            <div class="game-icon">
+                🍔
+            </div>
+
+            <h2>
+                Higher or Lower
+            </h2>
+
+            <p>
+                Which food has more calories?
+            </p>
 
         </button>
 
@@ -1284,7 +1405,104 @@ body {
 
 
 </section>
+<!-- =======================================================
+     HIGHER OR LOWER
+======================================================= -->
 
+<section id="higherLowerScreen"
+         class="screen game-screen">
+
+    <div class="game-header">
+
+        <h1>
+            🍔 Higher or Lower
+        </h1>
+
+        <button class="back-button"
+                onclick="goHome()">
+
+            ← Back
+
+        </button>
+
+    </div>
+
+
+    <div class="game-content">
+
+        <div id="higherLowerProgress"
+             class="higher-lower-progress">
+
+            Round 1 of 5
+
+        </div>
+
+
+        <div class="higher-lower-question">
+
+            Does the next food have
+            <strong>MORE</strong> or
+            <strong>FEWER</strong>
+            calories?
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div id="higherLowerEmoji"
+                 class="food-emoji">
+
+                🍎
+
+            </div>
+
+            <div id="higherLowerFood"
+                 class="food-name">
+
+                Apple
+
+            </div>
+
+            <div id="higherLowerCalories"
+                 class="food-calories">
+
+                95 calories
+
+            </div>
+
+        </div>
+
+
+        <div class="higher-lower-buttons">
+
+            <button
+                class="higher-lower-button"
+                onclick="checkHigherLower('higher')">
+
+                ⬆️ HIGHER
+
+            </button>
+
+            <button
+                class="higher-lower-button"
+                onclick="checkHigherLower('lower')">
+
+                ⬇️ LOWER
+
+            </button>
+
+        </div>
+
+
+        <div id="higherLowerFeedback"
+             class="higher-lower-feedback">
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <script>
@@ -4224,7 +4442,477 @@ function resetMemoryTurn() {
         false;
 
 }
+/* =========================================================
+   HIGHER OR LOWER
+========================================================= */
 
+const higherLowerFoods = [
+
+    {
+        name: "Apple",
+        emoji: "🍎",
+        calories: 95
+    },
+
+    {
+        name: "Banana",
+        emoji: "🍌",
+        calories: 105
+    },
+
+    {
+        name: "Pizza",
+        emoji: "🍕",
+        calories: 285
+    },
+
+    {
+        name: "Cheeseburger",
+        emoji: "🍔",
+        calories: 520
+    },
+
+    {
+        name: "French Fries",
+        emoji: "🍟",
+        calories: 365
+    },
+
+    {
+        name: "Salad",
+        emoji: "🥗",
+        calories: 150
+    },
+
+    {
+        name: "Donut",
+        emoji: "🍩",
+        calories: 270
+    },
+
+    {
+        name: "Ice Cream",
+        emoji: "🍦",
+        calories: 210
+    },
+
+    {
+        name: "Chicken Sandwich",
+        emoji: "🥪",
+        calories: 430
+    },
+
+    {
+        name: "Taco",
+        emoji: "🌮",
+        calories: 190
+    },
+
+    {
+        name: "Hot Dog",
+        emoji: "🌭",
+        calories: 290
+    },
+
+    {
+        name: "Chocolate Bar",
+        emoji: "🍫",
+        calories: 230
+    },
+
+    {
+        name: "Orange",
+        emoji: "🍊",
+        calories: 62
+    },
+
+    {
+        name: "Bagel",
+        emoji: "🥯",
+        calories: 270
+    },
+
+    {
+        name: "Pancakes",
+        emoji: "🥞",
+        calories: 350
+    },
+
+    {
+        name: "Chicken Nuggets",
+        emoji: "🍗",
+        calories: 250
+    },
+
+    {
+        name: "Grilled Cheese",
+        emoji: "🧀",
+        calories: 400
+    },
+
+    {
+        name: "Yogurt",
+        emoji: "🥛",
+        calories: 120
+    }
+
+];
+
+
+let higherLowerCurrentFood;
+
+let higherLowerNextFood;
+
+let higherLowerScore = 0;
+
+let higherLowerRound = 0;
+
+let higherLowerLocked = false;
+
+
+/* =========================================================
+   OPEN GAME
+========================================================= */
+
+function openHigherLowerGame() {
+
+    openGame(
+        "higherLowerScreen"
+    );
+
+    startHigherLowerGame();
+
+}
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+function startHigherLowerGame() {
+
+    higherLowerScore = 0;
+
+    higherLowerRound = 0;
+
+    higherLowerLocked = false;
+
+
+    higherLowerCurrentFood =
+        higherLowerFoods[
+            Math.floor(
+                Math.random() *
+                higherLowerFoods.length
+            )
+        ];
+
+
+    loadHigherLowerRound();
+
+}
+
+
+/* =========================================================
+   LOAD ROUND
+========================================================= */
+
+function loadHigherLowerRound() {
+
+    higherLowerLocked = false;
+
+
+    if (
+        higherLowerRound >= 5
+    ) {
+
+        showHigherLowerFinalScore();
+
+        return;
+
+    }
+
+
+    let availableFoods =
+        higherLowerFoods.filter(
+            food =>
+                food.name !==
+                higherLowerCurrentFood.name
+        );
+
+
+    higherLowerNextFood =
+        availableFoods[
+            Math.floor(
+                Math.random() *
+                availableFoods.length
+            )
+        ];
+
+
+    document.getElementById(
+        "higherLowerProgress"
+    ).textContent =
+        `Round ${higherLowerRound + 1} of 5`;
+
+
+    document.getElementById(
+        "higherLowerEmoji"
+    ).textContent =
+        higherLowerCurrentFood.emoji;
+
+
+    document.getElementById(
+        "higherLowerFood"
+    ).textContent =
+        higherLowerCurrentFood.name;
+
+
+    document.getElementById(
+        "higherLowerCalories"
+    ).textContent =
+        `${higherLowerCurrentFood.calories} calories`;
+
+
+    document.getElementById(
+        "higherLowerFeedback"
+    ).textContent = "";
+
+}
+
+
+/* =========================================================
+   CHECK HIGHER / LOWER
+========================================================= */
+
+function checkHigherLower(answer) {
+
+    if (
+        higherLowerLocked
+    ) {
+
+        return;
+
+    }
+
+
+    higherLowerLocked = true;
+
+
+    let correctAnswer;
+
+
+    if (
+        higherLowerNextFood.calories >
+        higherLowerCurrentFood.calories
+    ) {
+
+        correctAnswer =
+            "higher";
+
+    }
+
+    else {
+
+        correctAnswer =
+            "lower";
+
+    }
+
+
+    let feedback =
+        document.getElementById(
+            "higherLowerFeedback"
+        );
+
+
+    if (
+        answer ===
+        correctAnswer
+    ) {
+
+        higherLowerScore++;
+
+        feedback.style.color =
+            "#76e6a2";
+
+        feedback.textContent =
+            "✓ Correct!";
+
+    }
+
+    else {
+
+        feedback.style.color =
+            "#ff9b9b";
+
+        feedback.textContent =
+            "✗ Incorrect!";
+
+    }
+
+
+    higherLowerRound++;
+
+
+    setTimeout(
+        () => {
+
+            higherLowerCurrentFood =
+                higherLowerNextFood;
+
+            loadHigherLowerRound();
+
+        },
+        1000
+    );
+
+}
+
+
+/* =========================================================
+   FINAL SCORE
+========================================================= */
+
+function showHigherLowerFinalScore() {
+
+    document.querySelector(
+        "#higherLowerScreen .game-content"
+    ).innerHTML = `
+
+        <div class="game-over">
+
+            <div class="game-over-icon">
+
+                🎉
+
+            </div>
+
+
+            <h2>
+
+                Game Complete!
+
+            </h2>
+
+
+            <div class="final-score-label">
+
+                Your Score
+
+            </div>
+
+
+            <div class="final-score">
+
+                ${higherLowerScore} / 5
+
+            </div>
+
+
+            <button
+                class="primary-button"
+                onclick="restartHigherLower()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   RESTART GAME
+========================================================= */
+
+function restartHigherLower() {
+
+    document.querySelector(
+        "#higherLowerScreen .game-content"
+    ).innerHTML = `
+
+        <div id="higherLowerProgress"
+             class="higher-lower-progress">
+
+            Round 1 of 5
+
+        </div>
+
+
+        <div class="higher-lower-question">
+
+            Does the next food have
+            <strong>MORE</strong> or
+            <strong>FEWER</strong>
+            calories?
+
+        </div>
+
+
+        <div class="food-card">
+
+            <div id="higherLowerEmoji"
+                 class="food-emoji">
+
+                🍎
+
+            </div>
+
+
+            <div id="higherLowerFood"
+                 class="food-name">
+
+                Apple
+
+            </div>
+
+
+            <div id="higherLowerCalories"
+                 class="food-calories">
+
+                95 calories
+
+            </div>
+
+        </div>
+
+
+        <div class="higher-lower-buttons">
+
+            <button
+                class="higher-lower-button"
+                onclick="checkHigherLower('higher')">
+
+                ⬆️ HIGHER
+
+            </button>
+
+
+            <button
+                class="higher-lower-button"
+                onclick="checkHigherLower('lower')">
+
+                ⬇️ LOWER
+
+            </button>
+
+        </div>
+
+
+        <div id="higherLowerFeedback"
+             class="higher-lower-feedback">
+
+        </div>
+
+    `;
+
+
+    startHigherLowerGame();
+
+}
 
 
 /* =========================================================
