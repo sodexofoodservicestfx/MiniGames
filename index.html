@@ -4875,11 +4875,97 @@ function showHigherLowerFinalScore() {
 
 function restartHigherLower() {
 
+    document.querySelector(
+        "#higherLowerScreen .game-content"
+    ).innerHTML = `
+
+        <div id="higherLowerProgress"
+             class="higher-lower-progress">
+
+            Round 1 of 5
+
+        </div>
+
+
+        <div class="higher-lower-question">
+
+            Which food has <strong>MORE</strong> calories?
+
+        </div>
+
+
+        <div class="food-choice-container">
+
+            <button
+                id="foodChoice1"
+                class="food-choice"
+                onclick="chooseHigherLower(0)">
+
+                <div id="foodEmoji1"
+                     class="food-emoji">
+
+                    🍎
+
+                </div>
+
+                <div id="foodName1"
+                     class="food-name">
+
+                    Apple
+
+                </div>
+
+                <div id="foodCalories1"
+                     class="food-calories">
+
+                </div>
+
+            </button>
+
+
+            <button
+                id="foodChoice2"
+                class="food-choice"
+                onclick="chooseHigherLower(1)">
+
+                <div id="foodEmoji2"
+                     class="food-emoji">
+
+                    🍕
+
+                </div>
+
+                <div id="foodName2"
+                     class="food-name">
+
+                    Pizza
+
+                </div>
+
+                <div id="foodCalories2"
+                     class="food-calories">
+
+                </div>
+
+            </button>
+
+        </div>
+
+
+        <div id="higherLowerFeedback"
+             class="higher-lower-feedback">
+
+        </div>
+
+    `;
+
+
     higherLowerScore = 0;
 
     higherLowerRound = 0;
 
     higherLowerLocked = false;
+
 
     loadHigherLowerRound();
 
